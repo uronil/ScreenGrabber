@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:screengrab"
         mc:Ignorable="d"
         Title="Screen Grabber" Width="334" Height="452.233" Background="White" ResizeMode="CanMinimize">
+    
     <Border Padding="10">
         <Canvas>
             <Button  Content="Screen" Click="Button_Click" Width="189" Height="26"/>
@@ -46,7 +47,6 @@
             <Label Content="Link to your profile" Canvas.Left="10" Canvas.Top="360" Width="157" Padding="1,5,5,5" Cursor="Hand" Background="White" Foreground="#FF0074FF"></Label>
 
         </Canvas>
-
     </Border>
 </Window> 
     
