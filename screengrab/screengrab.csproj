@@ -72,10 +72,7 @@
     <Compile Include="CaptureWindow.xaml.cs">
       <DependentUpon>CaptureWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="HotKey.cs" />
-    <Compile Include="KBDHook.cs" />
     <Compile Include="KeyboardListener.cs" />
-    <Compile Include="LowLevelKeyboardListener.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
