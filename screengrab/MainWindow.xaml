@@ -1,0 +1,53 @@
+﻿<Window x:Class="screengrab.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:screengrab"
+        mc:Ignorable="d"
+        Title="Screen Grabber" Width="334" Height="452.233" Background="White" ResizeMode="CanMinimize">
+    <Border Padding="10">
+        <Canvas>
+            <Button  Content="Screen" Click="Button_Click" Width="189" Height="26"/>
+            <Button Content="Login" Canvas.Left="194" Width="102" Height="26"></Button>
+
+            <GroupBox Header="Shortcuts" Height="98" Canvas.Top="31" Width="296"/>
+
+            <TextBox Text="CTRL+SHIFT+X" Canvas.Top="55" Width="121" Height="26" VerticalContentAlignment="Center" Canvas.Left="10" Cursor="Hand"></TextBox>
+            <Label Content="Screen to clipboard" Canvas.Left="136" Canvas.Top="55" Width="160" Padding="0,5,5,5"></Label>
+
+            <TextBox Text="CTRL+SHIFT+C" Canvas.Top="86" Width="121" Height="26" VerticalContentAlignment="Center" Canvas.Left="10" Cursor="Hand"></TextBox>
+            <Label Content="Screen with edit" Canvas.Left="136" Canvas.Top="86" Width="160" Padding="0,5,5,5"></Label>
+
+            <GroupBox Header="Images" Height="123" Canvas.Top="134" Width="296"/>
+
+            <CheckBox RenderTransformOrigin="0.836,0.904" Canvas.Left="10" Canvas.Top="152" Height="26" VerticalContentAlignment="Center" Width="138" Padding="0">
+                <Label Content="Load images to disk" Canvas.Left="26" Canvas.Top="152" Width="120" Padding="5"></Label>
+            </CheckBox>
+
+            <TextBox Text="C:\Program Files\Unity\Editor\Data\il2cpp" Canvas.Top="183" Width="218" Height="26" VerticalContentAlignment="Center" Canvas.Left="10"></TextBox>
+            <Button Content="More..." Canvas.Left="233" Width="51" Height="26" Canvas.Top="183"></Button>
+
+            <Label Content="Image format" Canvas.Top="214" Width="81" Canvas.Left="10" Padding="0,5,5,5"/>
+            <ComboBox Canvas.Left="194" Canvas.Top="214" Width="90" Height="26" SelectedIndex="0" VerticalContentAlignment="Center" >
+                <ComboBoxItem Content="JPG"/>
+                <ComboBoxItem Content="BMP"/>
+            </ComboBox>
+
+            <GroupBox Header="Options" Height="130" Canvas.Top="263" Width="296"/>
+
+            <CheckBox RenderTransformOrigin="0.836,0.904" Canvas.Left="10" Canvas.Top="282" Height="26" VerticalContentAlignment="Center" Width="109" Padding="0">
+                <Label Content="Startup" Canvas.Left="26" Canvas.Top="152" Width="99" Padding="5"></Label>
+            </CheckBox>
+            <CheckBox RenderTransformOrigin="0.836,0.904" Canvas.Left="10" Canvas.Top="308" Height="26" VerticalContentAlignment="Center" Width="179" Padding="0">
+                <Label Content="Open picture in browser" Canvas.Left="26" Canvas.Top="152" Width="169" Padding="5" RenderTransformOrigin="0.508,0.502"></Label>
+            </CheckBox>
+            <Label Content="Link to website" Canvas.Left="10" Canvas.Top="334" Width="99" Padding="1,5,5,5" Cursor="Hand" Background="White" Foreground="#FF0074FF"></Label>
+            <Label Content="Link to your profile" Canvas.Left="10" Canvas.Top="360" Width="157" Padding="1,5,5,5" Cursor="Hand" Background="White" Foreground="#FF0074FF"></Label>
+
+        </Canvas>
+
+    </Border>
+</Window> 
+    
+    
