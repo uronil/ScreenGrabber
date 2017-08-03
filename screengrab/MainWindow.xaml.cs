@@ -30,9 +30,12 @@ namespace screengrab
         }
 
         void KListener_KeyDown(object sender, RawKeyEventArgs e) {
+            // Control pressed keys
             if (!pressedKeys.Contains(e.Key))
                 pressedKeys.Add(e.Key);
             //link_profile.Content = string.Join<Key>(" + ", pressedKeys);
+
+            // Hotkey checking
             if (screen.IsPressed(pressedKeys))
                 link_profile.Content = screen.name;
             if (screenFast.IsPressed(pressedKeys))
@@ -40,6 +43,7 @@ namespace screengrab
         }
 
         void KListener_KeyUp(object sender, RawKeyEventArgs e) {
+            // Control pressed keys
             pressedKeys.Remove(e.Key);
         }
 
