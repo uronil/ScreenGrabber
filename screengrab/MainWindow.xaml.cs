@@ -26,7 +26,7 @@ namespace screengrab
 
             // Hotkeys initialization
             screen = new Hotkey("screen", new List<Key> {Key.C, Key.LeftCtrl, Key.LeftShift });
-            screenFast = new Hotkey("screenFast", new List<Key> { Key.V, Key.LeftCtrl, Key.LeftShift });
+            screenFast = new Hotkey("screenFast", new List<Key> { Key.X, Key.LeftCtrl, Key.LeftShift });
         }
 
         void KListener_KeyDown(object sender, RawKeyEventArgs e) {
@@ -37,9 +37,9 @@ namespace screengrab
 
             // Hotkey checking
             if (screen.IsPressed(pressedKeys))
-                link_profile.Content = screen.name;
+                OpenCaptureWindow(1);
             if (screenFast.IsPressed(pressedKeys))
-                link_profile.Content = screenFast.name;
+                OpenCaptureWindow(2);
         }
 
         void KListener_KeyUp(object sender, RawKeyEventArgs e) {
@@ -48,8 +48,13 @@ namespace screengrab
         }
 
         public void Button_Click(object sender, RoutedEventArgs e) {
-
+            OpenCaptureWindow(0);
         }
 
+        // Open CaptureWindow method
+        public void OpenCaptureWindow(int settings) {
+            CaptureWindow captureWindow = new CaptureWindow(settings);
+            captureWindow.Show();
+        }
     }
 }

@@ -19,9 +19,15 @@ namespace screengrab
     /// </summary>
     public partial class CaptureWindow : Window
     {
+        
         public CaptureWindow()
         {
             InitializeComponent();
+        }
+
+        public CaptureWindow(int inf) {
+            InitializeComponent();
+            testLabel.Content = inf;
         }
     }
 }
