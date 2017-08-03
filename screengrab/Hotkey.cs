@@ -16,6 +16,15 @@ namespace screengrab
             this.name = name;
             this.hotkey = hotkey;
         }
+
+        public bool IsPressed(List<Key> pressedKeys) {
+            bool temp = true;
+            foreach(Key k in this.hotkey) {
+                if (!pressedKeys.Contains(k))
+                    temp = false;
+            }
+            return temp;
+        }
         
         public override string ToString() {
             return string.Join<Key>(" + ", hotkey);
