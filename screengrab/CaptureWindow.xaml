@@ -9,6 +9,8 @@
         Title="CaptureWindow" Height="383.363" Width="620.526" Topmost="True" ResizeMode="NoResize" Cursor="Cross" WindowStyle="None">
     <Grid>
         <Label x:Name="testLabel" Content="Label" HorizontalAlignment="Left" Margin="87,71,0,0" VerticalAlignment="Top"/>
-
+        <Canvas x:Name="canvas">
+            
+        </Canvas>
     </Grid>
 </Window>
