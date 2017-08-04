@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Drawing;
+using System.IO;
+using System.Drawing.Imaging;
 
 namespace screengrab
 {
@@ -39,17 +41,21 @@ namespace screengrab
 
             this.Top = 0;
             this.Left = 0;
-            
-            //using (Bitmap bmp = new Bitmap((int)screenWidth, (int)screenHeight)) {
-            //    using (Graphics g = Graphics.FromImage(bmp)) {
-            //        String filename = "ScreenCapture-" + DateTime.Now.ToString("ddMMyyyy-hhmmss") + ".png";
-            //        Opacity = .0;
-            //        g.CopyFromScreen((int)screenLeft, (int)screenTop, 0, 0, bmp.Size);
-            //        bmp.Save(@"C:/Screenshots/" + filename);
-            //        Opacity = 1;
-                    
-            //    }
-            //}
+
+            Bitmap bmp = new Bitmap((int)screenWidth, (int)screenHeight);
+            Graphics g = Graphics.FromImage(bmp);
+            g.CopyFromScreen((int)screenLeft, (int)screenTop, 0, 0, bmp.Size);
+            using (MemoryStream memory = new MemoryStream()) {
+                bmp.Save(memory, ImageFormat.Png);
+                memory.Position = 0;
+                BitmapImage bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.StreamSource = memory;
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.EndInit();
+
+                image.Source = bitmapImage;
+            }
         }
 
     }
