@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:screengrab"
         mc:Ignorable="d"
         KeyDown="Window_KeyDown"
-        Title="CaptureWindow" Height="383.363" Width="620.526" Topmost="True" ResizeMode="NoResize" Cursor="Cross" WindowStyle="None">
+        Title="CaptureWindow" Height="360.29" Width="494.513" Topmost="True" ResizeMode="NoResize" Cursor="Cross" WindowStyle="None">
     <Grid>
-        <Image x:Name="image"></Image>
-        <Canvas x:Name="canvas"/>
+        <Canvas x:Name="canvas"
+                MouseUp="MouseUp" MouseDown="MouseDown" MouseMove="MouseMove"></Canvas>
     </Grid>
 </Window>
