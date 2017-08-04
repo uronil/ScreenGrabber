@@ -15,7 +15,7 @@ namespace screengrab
 
         // Hotkeys
         Hotkey screen, screenFast;
-        
+
 
         public MainWindow() {
             InitializeComponent();
