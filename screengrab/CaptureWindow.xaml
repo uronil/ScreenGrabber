@@ -8,10 +8,7 @@
         KeyDown="Window_KeyDown"
         Title="CaptureWindow" Height="383.363" Width="620.526" Topmost="True" ResizeMode="NoResize" Cursor="Cross" WindowStyle="None">
     <Grid>
-        <Label x:Name="testLabel" Content="Label" HorizontalAlignment="Left" Margin="87,71,0,0" VerticalAlignment="Top"/>
-        <Canvas x:Name="canvas">
-            <Image x:Name="image" Height="100" Canvas.Left="129" Canvas.Top="144" Width="100"/>
-
-        </Canvas>
+        <Image x:Name="image"></Image>
+        <Canvas x:Name="canvas"/>
     </Grid>
 </Window>
