@@ -14,20 +14,31 @@ using System.Windows.Shapes;
 
 namespace screengrab
 {
-    /// <summary>
-    /// Interaction logic for CaptureWindow.xaml
-    /// </summary>
     public partial class CaptureWindow : Window
     {
+        double screenWidth, screenHeight;
         
         public CaptureWindow()
         {
             InitializeComponent();
         }
 
+        private void Window_KeyDown(object sender, KeyEventArgs e) {
+            if (e.Key == Key.Escape)
+                this.Close();
+        }
+
         public CaptureWindow(int inf) {
             InitializeComponent();
-            testLabel.Content = inf;
+            
+            screenHeight = SystemParameters.PrimaryScreenHeight;
+            screenWidth = SystemParameters.PrimaryScreenWidth;
+
+            this.Height = screenHeight;
+            this.Width = screenWidth;
+
+            this.Top = 0;
+            this.Left = 0;
         }
     }
 }
