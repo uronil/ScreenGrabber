@@ -10,5 +10,8 @@
     <Grid>
         <Canvas x:Name="canvas"
                 MouseUp="MouseUp" MouseDown="MouseDown" MouseMove="MouseMove"></Canvas>
+        <Border BorderBrush="Red"
+                BorderThickness="2"
+                Opacity="0.8" />
     </Grid>
 </Window>

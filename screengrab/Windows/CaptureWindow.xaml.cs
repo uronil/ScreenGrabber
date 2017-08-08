@@ -8,8 +8,8 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
-using System.Drawing;
 using System.Windows.Interop;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
@@ -39,7 +39,7 @@ namespace screengrab
             this.Top = 0;
             this.Left = 0;
 
-            System.Windows.Controls.Image img = new System.Windows.Controls.Image();
+            Image img = new Image();
             img.Source = CopyScreen();
             canvas.Children.Add(img);
         }
@@ -50,8 +50,8 @@ namespace screengrab
             var width = (int)screenWidth;
             var height = (int)screenHeight;
 
-            using (var screenBmp = new Bitmap(width, height, System.Drawing.Imaging.PixelFormat.Format32bppArgb)) {
-                using (var bmpGraphics = Graphics.FromImage(screenBmp)) {
+            using (var screenBmp = new System.Drawing.Bitmap(width, height, System.Drawing.Imaging.PixelFormat.Format32bppArgb)) {
+                using (var bmpGraphics = System.Drawing.Graphics.FromImage(screenBmp)) {
                     bmpGraphics.CopyFromScreen(left, top, 0, 0, new System.Drawing.Size(width, height));
                     return Imaging.CreateBitmapSourceFromHBitmap(
                         screenBmp.GetHbitmap(),
@@ -62,8 +62,8 @@ namespace screengrab
             }
         }
 
-        System.Windows.Point currentPoint = new System.Windows.Point();
-        System.Windows.Point firstPoint = new System.Windows.Point();
+        Point currentPoint = new Point();
+        Point firstPoint = new Point();
 
         private void MouseUp(object sender, MouseButtonEventArgs e) {
             first = false;
@@ -77,58 +77,37 @@ namespace screengrab
             if (first == false && e.ButtonState == MouseButtonState.Pressed) {
                 first = true;
                 firstPoint = e.GetPosition(this);
+
+                _rect = new Rectangle {
+                    Stroke = Brushes.White,
+                    StrokeThickness = 1,
+                    Fill = new SolidColorBrush(Color.FromArgb(125, 255, 255, 255))
+                };
+                Canvas.SetLeft(_rect, firstPoint.X);
+                Canvas.SetTop(_rect, firstPoint.Y);
+                
+                canvas.Children.Add(_rect);
             }
         }
 
+        Rectangle _rect;
+
         private void MouseMove(object sender, MouseEventArgs e) {
             if (e.LeftButton == MouseButtonState.Pressed) {
-                Line line = new Line();
-
-                // ----- RECT -----
-                Line top = new Line();
-                Line left = new Line();
-                Line right = new Line();
-                Line bottom = new Line();
-
-                top.Stroke = System.Windows.SystemColors.WindowFrameBrush;
-                top.X1 = firstPoint.X;
-                top.Y1 = firstPoint.Y;
-                top.X2 = e.GetPosition(this).X;
-                top.Y2 = firstPoint.Y;
-
-                left.Stroke = System.Windows.SystemColors.WindowFrameBrush;
-                left.X1 = firstPoint.X;
-                left.Y1 = firstPoint.Y;
-                left.X2 = firstPoint.X;
-                left.Y2 = e.GetPosition(this).Y;
-
-                right.Stroke = System.Windows.SystemColors.WindowFrameBrush;
-                right.X1 = top.X2;
-                right.Y1 = top.Y2;
-                right.X2 = top.X2;
-                right.Y2 = e.GetPosition(this).Y;
-
-                bottom.Stroke = System.Windows.SystemColors.WindowFrameBrush;
-                bottom.X1 = left.X2;
-                bottom.Y1 = left.Y2;
-                bottom.X2 = e.GetPosition(this).X;
-                bottom.Y2 = e.GetPosition(this).Y;
-
-                line.Stroke = System.Windows.SystemColors.WindowFrameBrush;
-                line.X1 = currentPoint.X;
-                line.Y1 = currentPoint.Y;
-                line.X2 = e.GetPosition(this).X;
-                line.Y2 = e.GetPosition(this).Y;
-
-                canvas.Children.Add(top);
-                canvas.Children.Add(left);
-                canvas.Children.Add(right);
-                canvas.Children.Add(bottom);
-                // ----- RECT -----
-
                 currentPoint = e.GetPosition(this);
-                
-                canvas.Children.Add(line);
+
+                var x = Math.Min(currentPoint.X, firstPoint.X);
+                var y = Math.Min(currentPoint.Y, firstPoint.Y);
+
+                var w = Math.Max(currentPoint.X, firstPoint.X) - x;
+                var h = Math.Max(currentPoint.Y, firstPoint.Y) - y;
+
+                _rect.Width = w;
+                _rect.Height = h;
+
+                Canvas.SetLeft(_rect, x);
+                Canvas.SetTop(_rect, y);
+
             }
         }
     }
