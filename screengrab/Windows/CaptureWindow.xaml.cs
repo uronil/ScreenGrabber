@@ -63,19 +63,35 @@ namespace screengrab
         }
 
         System.Windows.Point currentPoint = new System.Windows.Point();
+        System.Windows.Point firstPoint = new System.Windows.Point();
 
         private void MouseUp(object sender, MouseButtonEventArgs e) {
-
+            first = false;
         }
+
+        bool first = false;
 
         private void MouseDown(object sender, MouseButtonEventArgs e) {
             if (e.ButtonState == MouseButtonState.Pressed)
                 currentPoint = e.GetPosition(this);
+            if (first == false && e.ButtonState == MouseButtonState.Pressed) {
+                first = true;
+                firstPoint = e.GetPosition(this);
+            }
         }
 
         private void MouseMove(object sender, MouseEventArgs e) {
             if (e.LeftButton == MouseButtonState.Pressed) {
                 Line line = new Line();
+
+                System.Windows.Shapes.Rectangle myRect = new System.Windows.Shapes.Rectangle();
+                myRect.Stroke = System.Windows.Media.Brushes.White;
+                myRect.Fill = System.Windows.Media.Brushes.SkyBlue;
+                myRect.HorizontalAlignment = HorizontalAlignment.Left;
+                myRect.VerticalAlignment = VerticalAlignment.Center;
+                myRect.Height = firstPoint.X;
+                myRect.Width = firstPoint.Y;
+                canvas.Children.Add(myRect);
 
                 line.Stroke = System.Windows.SystemColors.WindowFrameBrush;
                 line.X1 = currentPoint.X;
