@@ -84,14 +84,35 @@ namespace screengrab
             if (e.LeftButton == MouseButtonState.Pressed) {
                 Line line = new Line();
 
-                System.Windows.Shapes.Rectangle myRect = new System.Windows.Shapes.Rectangle();
-                myRect.Stroke = System.Windows.Media.Brushes.White;
-                myRect.Fill = System.Windows.Media.Brushes.SkyBlue;
-                myRect.HorizontalAlignment = HorizontalAlignment.Left;
-                myRect.VerticalAlignment = VerticalAlignment.Center;
-                myRect.Height = firstPoint.X;
-                myRect.Width = firstPoint.Y;
-                canvas.Children.Add(myRect);
+                // ----- RECT -----
+                Line top = new Line();
+                Line left = new Line();
+                Line right = new Line();
+                Line bottom = new Line();
+
+                top.Stroke = System.Windows.SystemColors.WindowFrameBrush;
+                top.X1 = firstPoint.X;
+                top.Y1 = firstPoint.Y;
+                top.X2 = e.GetPosition(this).X;
+                top.Y2 = firstPoint.Y;
+
+                left.Stroke = System.Windows.SystemColors.WindowFrameBrush;
+                left.X1 = firstPoint.X;
+                left.Y1 = firstPoint.Y;
+                left.X2 = firstPoint.X;
+                left.Y2 = e.GetPosition(this).Y;
+
+                right.Stroke = System.Windows.SystemColors.WindowFrameBrush;
+                right.X1 = top.X2;
+                right.Y1 = top.Y2;
+                right.X2 = top.X2;
+                right.Y2 = e.GetPosition(this).Y;
+
+                bottom.Stroke = System.Windows.SystemColors.WindowFrameBrush;
+                bottom.X1 = left.X2;
+                bottom.Y1 = left.Y2;
+                bottom.X2 = e.GetPosition(this).X;
+                bottom.Y2 = e.GetPosition(this).Y;
 
                 line.Stroke = System.Windows.SystemColors.WindowFrameBrush;
                 line.X1 = currentPoint.X;
@@ -99,8 +120,14 @@ namespace screengrab
                 line.X2 = e.GetPosition(this).X;
                 line.Y2 = e.GetPosition(this).Y;
 
-                currentPoint = e.GetPosition(this);
+                canvas.Children.Add(top);
+                canvas.Children.Add(left);
+                canvas.Children.Add(right);
+                canvas.Children.Add(bottom);
+                // ----- RECT -----
 
+                currentPoint = e.GetPosition(this);
+                
                 canvas.Children.Add(line);
             }
         }
