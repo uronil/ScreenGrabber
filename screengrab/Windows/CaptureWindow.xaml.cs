@@ -18,6 +18,7 @@ namespace screengrab
     public partial class CaptureWindow : Window
     {
         double screenWidth, screenHeight, screenLeft, screenTop;
+        Image img = new Image();
 
         // Close window on Escape click
         private void Window_KeyDown(object sender, KeyEventArgs e) {
@@ -38,8 +39,7 @@ namespace screengrab
 
             this.Top = 0;
             this.Left = 0;
-
-            Image img = new Image();
+            
             img.Source = CopyScreen();
             canvas.Children.Add(img);
         }
@@ -67,6 +67,7 @@ namespace screengrab
 
         private void MouseUp(object sender, MouseButtonEventArgs e) {
             first = false;
+            this.Close();
         }
 
         bool first = false;
@@ -81,7 +82,7 @@ namespace screengrab
                 _rect = new Rectangle {
                     Stroke = Brushes.White,
                     StrokeThickness = 1,
-                    Fill = new SolidColorBrush(Color.FromArgb(125, 255, 255, 255))
+                    Fill = new SolidColorBrush(Color.FromArgb(75, 255, 255, 255))
                 };
                 Canvas.SetLeft(_rect, firstPoint.X);
                 Canvas.SetTop(_rect, firstPoint.Y);
@@ -96,6 +97,10 @@ namespace screengrab
             if (e.LeftButton == MouseButtonState.Pressed) {
                 currentPoint = e.GetPosition(this);
 
+                if (currentPoint.Y < 0 || currentPoint.X < 0 || currentPoint.Y > Height || currentPoint.X > Width) {
+                    return;
+                }
+
                 var x = Math.Min(currentPoint.X, firstPoint.X);
                 var y = Math.Min(currentPoint.Y, firstPoint.Y);
 
@@ -104,6 +109,21 @@ namespace screengrab
 
                 _rect.Width = w;
                 _rect.Height = h;
+
+                if (w > 40 && h > 40) {
+                    WidthTB.Text = w.ToString();
+                    Canvas.SetTop(WidthPanel, y + 5);
+                    Canvas.SetLeft(WidthPanel, x + w / 2 - 10);
+
+                    HeightTB.Text = h.ToString();
+                    Canvas.SetTop(HeightPanel, y + h / 2 - 10);
+                    Canvas.SetLeft(HeightPanel, x + 5);
+                } else {
+                    WidthTB.Text = "";
+                    HeightTB.Text = "";
+                }
+
+
 
                 Canvas.SetLeft(_rect, x);
                 Canvas.SetTop(_rect, y);

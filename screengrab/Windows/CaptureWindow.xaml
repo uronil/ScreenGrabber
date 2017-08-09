@@ -1,4 +1,4 @@
-﻿<Window x:Class="screengrab.CaptureWindow"
+﻿ <Window x:Class="screengrab.CaptureWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -9,9 +9,25 @@
         Title="CaptureWindow" Height="360.29" Width="494.513" Topmost="True" ResizeMode="NoResize" Cursor="Cross" WindowStyle="None">
     <Grid>
         <Canvas x:Name="canvas"
-                MouseUp="MouseUp" MouseDown="MouseDown" MouseMove="MouseMove"></Canvas>
+                MouseUp="MouseUp" MouseDown="MouseDown" MouseMove="MouseMove">
+
+            <StackPanel Panel.ZIndex="2"
+                        x:Name="WidthPanel">
+                <TextBlock x:Name="WidthTB" Text="" Foreground="Black"></TextBlock>
+                
+            </StackPanel>
+
+            <StackPanel Panel.ZIndex="2"
+                        x:Name="HeightPanel">
+                <TextBlock x:Name="HeightTB" Text="" Foreground="Black"></TextBlock>
+            </StackPanel>
+            
+        </Canvas>
+        
         <Border BorderBrush="Red"
                 BorderThickness="2"
-                Opacity="0.8" />
+                Opacity="0.8"
+                MouseUp="MouseUp" MouseDown="MouseDown" MouseMove="MouseMove"/> 
     </Grid>
+    
 </Window>
