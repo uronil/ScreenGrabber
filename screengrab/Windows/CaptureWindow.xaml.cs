@@ -70,21 +70,23 @@ namespace screengrab
         Point firstClick = new Point();
         bool first = false;
         Rectangle _rect;
+        double x, y, w, h;
 
         private void MouseUp(object sender, MouseButtonEventArgs e) {
             first = false;
-
+            
             canvas.Children.Remove(_rect);
             canvas.Children.Remove(img);
-
             this.Close();
 
-            //img.Source = Imaging.CreateBitmapSourceFromHBitmap(img, IntPtr.Zero, _rect, BitmapSizeOptions.FromEmptyOptions());
-
-            img.Height = _rect.Height;
-            img.Width = _rect.Width;
+            CroppedBitmap cb = new CroppedBitmap(
+                (BitmapSource)img.Source, 
+                new Int32Rect((int)x, (int)y, (int)w, (int)h));
             
-            EditWindow editWindow = new EditWindow(img);
+            Image croppedImage = new Image();
+            croppedImage.Source = cb;
+            
+            EditWindow editWindow = new EditWindow(croppedImage);
             editWindow.Show();
         }
         
@@ -102,7 +104,7 @@ namespace screengrab
                 };
                 Canvas.SetLeft(_rect, firstClick.X);
                 Canvas.SetTop(_rect, firstClick.Y);
-                
+
                 canvas.Children.Add(_rect);
             }
         }
@@ -115,11 +117,11 @@ namespace screengrab
                     return;
                 }
 
-                var x = Math.Min(currentPoint.X, firstClick.X);
-                var y = Math.Min(currentPoint.Y, firstClick.Y);
+                x = Math.Min(currentPoint.X, firstClick.X);
+                y = Math.Min(currentPoint.Y, firstClick.Y);
 
-                var w = Math.Max(currentPoint.X, firstClick.X) - x;
-                var h = Math.Max(currentPoint.Y, firstClick.Y) - y;
+                w = Math.Max(currentPoint.X, firstClick.X) - x;
+                h = Math.Max(currentPoint.Y, firstClick.Y) - y;
 
                 _rect.Width = w;
                 _rect.Height = h;
