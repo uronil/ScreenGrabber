@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:screengrab.Windows"
         mc:Ignorable="d"
-        Title="EditWindow" Height="440.336" Width="683.194">
+        Title="Edit" Height="397.891" Width="679.833">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -15,17 +15,55 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="40"/>
         </Grid.ColumnDefinitions>
-        <Canvas x:Name="editCanvas"></Canvas>
-        <StackPanel Grid.Column="1" Background="#FFEEEEEE">
-            <Button Grid.Column="1" Height="30" Width="30" Margin="0,5"></Button>
-            <Button Grid.Column="1" Height="30" Width="30" Margin="0,5"></Button>
-            <Button Grid.Column="1" Height="30" Width="30" Margin="0,5"></Button>
+        <Canvas x:Name="editCanvas"
+                MouseDown="editCanvas_MouseDown"
+                MouseMove="editCanvas_MouseMove"
+                MouseUp="editCanvas_MouseUp">
+            
+        </Canvas>
+        <StackPanel Grid.Column="1" Background="White">
+            <Button x:Name="ButtonPaintPen"
+                    Click="ButtonPaintPen_Click"
+                    Grid.Column="1" 
+                    Height="30" 
+                    Width="30" 
+                    Margin="0,5" 
+                    Content="P">
+            </Button>
+            <Button x:Name="ButtonPaintRect"
+                    Click="ButtonPaintRect_Click"
+                    Grid.Column="1" 
+                    Height="30" 
+                    Width="30" 
+                    Margin="0,5"
+                    Content="R">
+            </Button>
+            <Button Grid.Column="1" 
+                    Height="30" 
+                    Width="30" 
+                    Margin="0,5">
+            </Button>
         </StackPanel>
 
-        <StackPanel Background="#FFE6E6E6" Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal" FlowDirection="RightToLeft">
-            <Button Height="30" Width="100" Margin="5"></Button>
-            <Button Height="30" Width="100" Margin="5"></Button>
-            <Button Height="30" Width="100" Margin="5"></Button>
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal" FlowDirection="RightToLeft" Background="White">
+            <Button Height="30" 
+                    Width="100" 
+                    Margin="5" 
+                    Content="Save image as..." 
+                    FlowDirection="LeftToRight">
+            </Button>
+            <Button Height="30" 
+                    Width="68" 
+                    Margin="5" 
+                    Content="Copy link">
+            </Button>
+            <Button x:Name="CopyToClipboard" 
+                    Click="CopyToClipboard_Click"
+                    Height="30" 
+                    Width="115" 
+                    Margin="5" 
+                    Content="Copy to clipboard">
+            </Button>
         </StackPanel>
     </Grid>
 </Window>

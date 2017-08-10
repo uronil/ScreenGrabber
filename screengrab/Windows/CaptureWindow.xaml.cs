@@ -85,7 +85,7 @@ namespace screengrab
             
             Image croppedImage = new Image();
             croppedImage.Source = cb;
-            
+
             EditWindow editWindow = new EditWindow(croppedImage);
             editWindow.Show();
         }
