@@ -1,0 +1,31 @@
+﻿<Window x:Class="screengrab.Windows.EditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:screengrab.Windows"
+        mc:Ignorable="d"
+        Title="EditWindow" Height="440.336" Width="683.194">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="40"/>
+        </Grid.ColumnDefinitions>
+        <Canvas></Canvas>
+        <StackPanel Grid.Column="1" Background="#FFEEEEEE">
+            <Button Grid.Column="1" Height="30" Width="30" Margin="0,5"></Button>
+            <Button Grid.Column="1" Height="30" Width="30" Margin="0,5"></Button>
+            <Button Grid.Column="1" Height="30" Width="30" Margin="0,5"></Button>
+        </StackPanel>
+
+        <StackPanel Background="#FFE6E6E6" Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal" FlowDirection="RightToLeft">
+            <Button Height="30" Width="100" Margin="5"></Button>
+            <Button Height="30" Width="100" Margin="5"></Button>
+            <Button Height="30" Width="100" Margin="5"></Button>
+        </StackPanel>
+    </Grid>
+</Window>

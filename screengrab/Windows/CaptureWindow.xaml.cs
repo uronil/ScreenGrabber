@@ -1,4 +1,5 @@
-﻿using System;
+﻿using screengrab.Windows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -74,6 +75,8 @@ namespace screengrab
             first = false;
             canvas.Children.Remove(_rect);
             this.Close();
+            EditWindow editWindow = new EditWindow();
+            editWindow.Show();
         }
         
         private void MouseDown(object sender, MouseButtonEventArgs e) {
