@@ -15,7 +15,7 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="40"/>
         </Grid.ColumnDefinitions>
-        <Canvas></Canvas>
+        <Canvas x:Name="editCanvas"></Canvas>
         <StackPanel Grid.Column="1" Background="#FFEEEEEE">
             <Button Grid.Column="1" Height="30" Width="30" Margin="0,5"></Button>
             <Button Grid.Column="1" Height="30" Width="30" Margin="0,5"></Button>

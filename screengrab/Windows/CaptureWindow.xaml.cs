@@ -73,9 +73,18 @@ namespace screengrab
 
         private void MouseUp(object sender, MouseButtonEventArgs e) {
             first = false;
+
             canvas.Children.Remove(_rect);
+            canvas.Children.Remove(img);
+
             this.Close();
-            EditWindow editWindow = new EditWindow();
+
+            //img.Source = Imaging.CreateBitmapSourceFromHBitmap(img, IntPtr.Zero, _rect, BitmapSizeOptions.FromEmptyOptions());
+
+            img.Height = _rect.Height;
+            img.Width = _rect.Width;
+            
+            EditWindow editWindow = new EditWindow(img);
             editWindow.Show();
         }
         

@@ -19,9 +19,10 @@ namespace screengrab.Windows
     /// </summary>
     public partial class EditWindow : Window
     {
-        public EditWindow()
+        public EditWindow(Image image)
         {
             InitializeComponent();
+            editCanvas.Children.Add(image);
         }
     }
 }
