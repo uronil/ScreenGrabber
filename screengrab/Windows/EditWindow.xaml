@@ -46,7 +46,9 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal" FlowDirection="RightToLeft" Background="White">
-            <Button Height="30" 
+            <Button x:Name="SaveImageAs" 
+                    Click="SaveImageAs_Click"
+                    Height="30" 
                     Width="100" 
                     Margin="5" 
                     Content="Save image as..." 

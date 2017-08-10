@@ -28,6 +28,7 @@ namespace screengrab.Windows
         }
 
         void ConfigurateWindowSize(Image image) {
+            // Added pixels for windows border and fields
             int addedHeight = 78, addedWidth = 56;
             if (image.Source.Height < 175) {
                 this.Height = 175 + addedHeight;
@@ -44,14 +45,55 @@ namespace screengrab.Windows
             } else {
                 this.Width = image.Source.Width + addedWidth;
             }
+
+            editCanvas.Height = image.Source.Height;
+            editCanvas.Width = image.Source.Width;
         }
 
         private void CopyToClipboard_Click(object sender, RoutedEventArgs e) {
             Clipboard.SetImage((BitmapSource)this.image.Source);
+            
             this.Close();
         }
 
+        private void SaveImageAs_Click(object sender, RoutedEventArgs e) {
+            ExportToPng("C:\\Main\\temp.png", editCanvas);
+        }
+
+
+
+        public static void ExportToPng(string path, Canvas surface) {
+            if (path == null) return;
+
+            // Get the size of canvas
+            Size size = new Size(surface.Width, surface.Height);
+            
+
+            var scale = 1;//100/96d;
+            surface.Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
+            var sz = surface.DesiredSize;
+            var rect = new Rect(sz);
+            surface.Arrange(rect);
+            var bmp = new RenderTargetBitmap((int)(scale * (rect.Width)),
+                                             (int)(scale * (rect.Height)),
+                                              scale * 96,
+                                              scale * 96,
+                                              PixelFormats.Default);
+            bmp.Render(surface);
+
+            /* Save image to file */
+            var enc = new System.Windows.Media.Imaging.PngBitmapEncoder();
+            enc.Frames.Add(System.Windows.Media.Imaging.BitmapFrame.Create(bmp));
+
+            using (var stm = System.IO.File.Create(path)) {
+                enc.Save(stm);
+            }
+        }
+
+        // For painting by pencil
         Point currentPoint = new Point();
+
+        // For painting by rectangle
         Point firstPoint = new Point();
         Rectangle rect;
 
@@ -140,5 +182,7 @@ namespace screengrab.Windows
         private void ButtonPaintRect_Click(object sender, RoutedEventArgs e) {
             paintType = PaintType.Rect;
         }
+
+        
     }
 }
