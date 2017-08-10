@@ -11,6 +11,7 @@
         <Canvas x:Name="canvas"
                 MouseUp="MouseUp" MouseDown="MouseDown" MouseMove="MouseMove">
 
+            <!--StackPanel necessary for choose textBlock position-->
             <StackPanel Panel.ZIndex="2"
                         x:Name="WidthPanel">
                 <TextBlock x:Name="WidthTB" Text="" Foreground="Black"></TextBlock>
@@ -21,7 +22,7 @@
                         x:Name="HeightPanel">
                 <TextBlock x:Name="HeightTB" Text="" Foreground="Black"></TextBlock>
             </StackPanel>
-            
+
         </Canvas>
         
         <Border BorderBrush="Red"

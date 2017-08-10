@@ -17,7 +17,10 @@ namespace screengrab
 {
     public partial class CaptureWindow : Window
     {
+        // Screen characteristics
         double screenWidth, screenHeight, screenLeft, screenTop;
+
+        // Desktop screenshot
         Image img = new Image();
 
         // Close window on Escape click
@@ -63,36 +66,35 @@ namespace screengrab
         }
 
         Point currentPoint = new Point();
-        Point firstPoint = new Point();
+        Point firstClick = new Point();
+        bool first = false;
+        Rectangle _rect;
 
         private void MouseUp(object sender, MouseButtonEventArgs e) {
             first = false;
+            canvas.Children.Remove(_rect);
             this.Close();
         }
-
-        bool first = false;
-
+        
         private void MouseDown(object sender, MouseButtonEventArgs e) {
             if (e.ButtonState == MouseButtonState.Pressed)
                 currentPoint = e.GetPosition(this);
             if (first == false && e.ButtonState == MouseButtonState.Pressed) {
                 first = true;
-                firstPoint = e.GetPosition(this);
+                firstClick = e.GetPosition(this);
 
                 _rect = new Rectangle {
                     Stroke = Brushes.White,
                     StrokeThickness = 1,
                     Fill = new SolidColorBrush(Color.FromArgb(75, 255, 255, 255))
                 };
-                Canvas.SetLeft(_rect, firstPoint.X);
-                Canvas.SetTop(_rect, firstPoint.Y);
+                Canvas.SetLeft(_rect, firstClick.X);
+                Canvas.SetTop(_rect, firstClick.Y);
                 
                 canvas.Children.Add(_rect);
             }
         }
-
-        Rectangle _rect;
-
+        
         private void MouseMove(object sender, MouseEventArgs e) {
             if (e.LeftButton == MouseButtonState.Pressed) {
                 currentPoint = e.GetPosition(this);
@@ -101,11 +103,11 @@ namespace screengrab
                     return;
                 }
 
-                var x = Math.Min(currentPoint.X, firstPoint.X);
-                var y = Math.Min(currentPoint.Y, firstPoint.Y);
+                var x = Math.Min(currentPoint.X, firstClick.X);
+                var y = Math.Min(currentPoint.Y, firstClick.Y);
 
-                var w = Math.Max(currentPoint.X, firstPoint.X) - x;
-                var h = Math.Max(currentPoint.Y, firstPoint.Y) - y;
+                var w = Math.Max(currentPoint.X, firstClick.X) - x;
+                var h = Math.Max(currentPoint.Y, firstClick.Y) - y;
 
                 _rect.Width = w;
                 _rect.Height = h;
@@ -122,12 +124,9 @@ namespace screengrab
                     WidthTB.Text = "";
                     HeightTB.Text = "";
                 }
-
-
-
+                
                 Canvas.SetLeft(_rect, x);
                 Canvas.SetTop(_rect, y);
-
             }
         }
     }
