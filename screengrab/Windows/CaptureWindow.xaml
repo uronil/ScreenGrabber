@@ -15,7 +15,6 @@
             <StackPanel Panel.ZIndex="2"
                         x:Name="WidthPanel">
                 <TextBlock x:Name="WidthTB" Text="" Foreground="Black"></TextBlock>
-                
             </StackPanel>
 
             <StackPanel Panel.ZIndex="2"
