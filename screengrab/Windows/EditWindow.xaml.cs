@@ -26,6 +26,7 @@ namespace screengrab.Windows
             editCanvas.Children.Add(this.image);
             ConfigurateWindowSize(this.image);
             paintType = PaintType.Pencil;
+            
         }
 
         void ConfigurateWindowSize(Image image) {
@@ -64,7 +65,7 @@ namespace screengrab.Windows
             if (saveFileDialog.ShowDialog() == true) {
                 BitmapEncoder enc = GetImageFromCanvas(editCanvas, saveFileDialog.FilterIndex);
                 using (var stm = System.IO.File.Create(saveFileDialog.FileName)) {
-                    enc.Save(stm);
+                    enc.Save(stm); // Saving image
                 }
             }
         }
