@@ -63,25 +63,13 @@ namespace screengrab.Windows
             saveFileDialog.DefaultExt = ".png"; // Default file extension
             saveFileDialog.Filter = "Png (*.png)|*.png|BMP (*.bmp)|*.bmp| JPG(*.jpg) | *.jpg";
             if (saveFileDialog.ShowDialog() == true) {
-                if (saveFileDialog.FilterIndex == 1)
-                    ExportTo(saveFileDialog.FileName, editCanvas, PictureFormat.PNG);
-                if (saveFileDialog.FilterIndex == 2)
-                    ExportTo(saveFileDialog.FileName, editCanvas, PictureFormat.BMP);
-                if (saveFileDialog.FilterIndex == 3)
-                    ExportTo(saveFileDialog.FileName, editCanvas, PictureFormat.JPG);
-                Console.WriteLine(saveFileDialog.FilterIndex);
+                ExportTo(saveFileDialog.FileName, editCanvas, saveFileDialog.FilterIndex);
+                Console.WriteLine(saveFileDialog.FileName);
             }
-            
+            Console.WriteLine(saveFileDialog.FileName);
         }
-
-        public enum PictureFormat
-        {
-            PNG,
-            BMP,
-            JPG
-        }
-
-        public static void ExportTo(string path, Canvas surface, PictureFormat format) {
+        
+        public static void ExportTo(string path, Canvas surface, int format) {
             if (path == null) return;
 
             // Get the size of canvas
@@ -103,19 +91,19 @@ namespace screengrab.Windows
             /* Save image to file */
             BitmapEncoder enc = null;
             switch (format) {
-                case PictureFormat.BMP:
+                case 1:
                     enc = new BmpBitmapEncoder();
                     break;
-                case PictureFormat.PNG:
+                case 2:
                     enc = new PngBitmapEncoder();
                     break;
-                case PictureFormat.JPG:
+                case 3:
                     enc = new JpegBitmapEncoder();
                     break;
             }
                 
             //var enc = new System.Windows.Media.Imaging.PngBitmapEncoder();
-            enc.Frames.Add(System.Windows.Media.Imaging.BitmapFrame.Create(bmp));
+            enc.Frames.Add(BitmapFrame.Create(bmp));
 
             using (var stm = System.IO.File.Create(path)) {
                 enc.Save(stm);
