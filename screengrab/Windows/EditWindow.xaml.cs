@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -57,12 +58,30 @@ namespace screengrab.Windows
         }
 
         private void SaveImageAs_Click(object sender, RoutedEventArgs e) {
-            ExportToPng("C:\\Main\\temp.png", editCanvas);
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.FileName = "image"; // Default file name
+            saveFileDialog.DefaultExt = ".png"; // Default file extension
+            saveFileDialog.Filter = "Png (*.png)|*.png|BMP (*.bmp)|*.bmp| JPG(*.jpg) | *.jpg";
+            if (saveFileDialog.ShowDialog() == true) {
+                if (saveFileDialog.FilterIndex == 1)
+                    ExportTo(saveFileDialog.FileName, editCanvas, PictureFormat.PNG);
+                if (saveFileDialog.FilterIndex == 2)
+                    ExportTo(saveFileDialog.FileName, editCanvas, PictureFormat.BMP);
+                if (saveFileDialog.FilterIndex == 3)
+                    ExportTo(saveFileDialog.FileName, editCanvas, PictureFormat.JPG);
+                Console.WriteLine(saveFileDialog.FilterIndex);
+            }
+            
         }
 
+        public enum PictureFormat
+        {
+            PNG,
+            BMP,
+            JPG
+        }
 
-
-        public static void ExportToPng(string path, Canvas surface) {
+        public static void ExportTo(string path, Canvas surface, PictureFormat format) {
             if (path == null) return;
 
             // Get the size of canvas
@@ -82,7 +101,20 @@ namespace screengrab.Windows
             bmp.Render(surface);
 
             /* Save image to file */
-            var enc = new System.Windows.Media.Imaging.PngBitmapEncoder();
+            BitmapEncoder enc = null;
+            switch (format) {
+                case PictureFormat.BMP:
+                    enc = new BmpBitmapEncoder();
+                    break;
+                case PictureFormat.PNG:
+                    enc = new PngBitmapEncoder();
+                    break;
+                case PictureFormat.JPG:
+                    enc = new JpegBitmapEncoder();
+                    break;
+            }
+                
+            //var enc = new System.Windows.Media.Imaging.PngBitmapEncoder();
             enc.Frames.Add(System.Windows.Media.Imaging.BitmapFrame.Create(bmp));
 
             using (var stm = System.IO.File.Create(path)) {
