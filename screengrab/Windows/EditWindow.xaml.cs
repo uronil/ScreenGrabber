@@ -52,8 +52,7 @@ namespace screengrab.Windows
         }
 
         private void CopyToClipboard_Click(object sender, RoutedEventArgs e) {
-            Clipboard.SetImage((BitmapSource)this.image.Source);
-            
+            Clipboard.SetImage(GetImageFromCanvas(editCanvas,1).Frames[0]);
             this.Close();
         }
 
@@ -61,15 +60,17 @@ namespace screengrab.Windows
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.FileName = "image"; // Default file name
             saveFileDialog.DefaultExt = ".png"; // Default file extension
-            saveFileDialog.Filter = "Png (*.png)|*.png|BMP (*.bmp)|*.bmp| JPG(*.jpg) | *.jpg";
-            if (saveFileDialog.ShowDialog() == true) 
-                ExportTo(saveFileDialog.FileName, editCanvas, saveFileDialog.FilterIndex);
-            
+            saveFileDialog.Filter = "Png (*.png)|*.png|JPG(*.jpg)|*.jpg|BMP (*.bmp)|*.bmp";
+            if (saveFileDialog.ShowDialog() == true) {
+                BitmapEncoder enc = GetImageFromCanvas(editCanvas, saveFileDialog.FilterIndex);
+                using (var stm = System.IO.File.Create(saveFileDialog.FileName)) {
+                    enc.Save(stm);
+                }
+            }
         }
         
-        public static void ExportTo(string path, Canvas surface, int format) {
-            if (path == null) return;
-
+        public BitmapEncoder GetImageFromCanvas( Canvas surface, int format) {
+           
             // Get the size of canvas
             Size size = new Size(surface.Width, surface.Height);
             
@@ -84,27 +85,22 @@ namespace screengrab.Windows
                                               scale * 96,
                                               PixelFormats.Default);
             bmp.Render(surface);
-
-            /* Save image to file */
+            
             BitmapEncoder enc = null;
             switch (format) {
-                case 1:
-                    enc = new BmpBitmapEncoder();
-                    break;
-                case 2:
+                case 1: // PNG
                     enc = new PngBitmapEncoder();
                     break;
-                case 3:
+                case 2: // JPG
                     enc = new JpegBitmapEncoder();
                     break;
+                case 3: // BMP
+                    enc = new BmpBitmapEncoder();
+                    break;
             }
-                
-            //var enc = new System.Windows.Media.Imaging.PngBitmapEncoder();
-            enc.Frames.Add(BitmapFrame.Create(bmp));
 
-            using (var stm = System.IO.File.Create(path)) {
-                enc.Save(stm);
-            }
+            enc.Frames.Add(BitmapFrame.Create(bmp));
+            return enc;
         }
 
         // For painting by pencil
