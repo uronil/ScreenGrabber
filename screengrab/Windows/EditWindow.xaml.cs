@@ -62,11 +62,9 @@ namespace screengrab.Windows
             saveFileDialog.FileName = "image"; // Default file name
             saveFileDialog.DefaultExt = ".png"; // Default file extension
             saveFileDialog.Filter = "Png (*.png)|*.png|BMP (*.bmp)|*.bmp| JPG(*.jpg) | *.jpg";
-            if (saveFileDialog.ShowDialog() == true) {
+            if (saveFileDialog.ShowDialog() == true) 
                 ExportTo(saveFileDialog.FileName, editCanvas, saveFileDialog.FilterIndex);
-                Console.WriteLine(saveFileDialog.FileName);
-            }
-            Console.WriteLine(saveFileDialog.FileName);
+            
         }
         
         public static void ExportTo(string path, Canvas surface, int format) {
@@ -75,7 +73,6 @@ namespace screengrab.Windows
             // Get the size of canvas
             Size size = new Size(surface.Width, surface.Height);
             
-
             var scale = 1;//100/96d;
             surface.Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
             var sz = surface.DesiredSize;
