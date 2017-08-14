@@ -9,10 +9,11 @@ using System.Xml.Serialization;
 
 namespace screengrab
 {
+    [Serializable]
     [XmlRoot("Hotkey")]
     public class Hotkey  {
         public string name;
-        [XmlArrayItem(ElementName = "hotkey", Type = typeof(Key))]
+        [XmlArray("hotkey"), XmlArrayItem(typeof(Key), ElementName = "Key")]
         private List<Key> hotkey;
 
         public Hotkey() { }

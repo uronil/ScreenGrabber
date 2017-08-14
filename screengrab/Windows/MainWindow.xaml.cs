@@ -17,23 +17,30 @@ namespace screengrab
         // Hotkeys
         Hotkey screen, screenFast;
 
-        Settings settings = new Settings();
+        //Settings settings = new Settings();
 
-        private void writeSetting() {
-            settings.fields.loadImageToDisk = LoadImagesToDiskCheckBox.IsChecked.Value;
-            settings.fields.imageFormat = ImageFormatComboBox.SelectedIndex;
-            settings.fields.startup = StartupCheckBox.IsChecked.Value;
-            settings.fields.openPictureInBrowser = OpenInBrowserCheckBox.IsChecked.Value;
-            settings.WriteXml();
-        }
+        //private void writeSetting() {
+        //    settings.fields.loadImageToDisk = LoadImagesToDiskCheckBox.IsChecked.Value;
+        //    settings.fields.imageFormat = ImageFormatComboBox.SelectedIndex;
+        //    settings.fields.startup = StartupCheckBox.IsChecked.Value;
+        //    settings.fields.openPictureInBrowser = OpenInBrowserCheckBox.IsChecked.Value;
+        //    settings.WriteXml();
+        //}
         
-        private void readSetting() {
-            settings.ReadXml();
-            LoadImagesToDiskCheckBox.IsChecked = settings.fields.loadImageToDisk;
-            ImageFormatComboBox.SelectedIndex = settings.fields.imageFormat;
-            StartupCheckBox.IsChecked = settings.fields.startup;
-            OpenInBrowserCheckBox.IsChecked = settings.fields.openPictureInBrowser;
-        }
+        //private void readSetting() {
+        //    settings.ReadXml();
+        //    LoadImagesToDiskCheckBox.IsChecked = settings.fields.loadImageToDisk;
+        //    ImageFormatComboBox.SelectedIndex = settings.fields.imageFormat;
+        //    StartupCheckBox.IsChecked = settings.fields.startup;
+        //    OpenInBrowserCheckBox.IsChecked = settings.fields.openPictureInBrowser;
+        //}
+
+        //public void FirstLaunch() {
+        //    if (settings.fields.firstLoad) {
+        //        Properties.Settings.Default.HotkeyScreen = new Hotkey("screen", new List<Key> { Key.C, Key.LeftCtrl, Key.LeftShift });
+        //        Properties.Settings.Default.HotkeyScreenFast = new Hotkey("screenFast", new List<Key> { Key.X, Key.LeftCtrl, Key.LeftShift });
+        //    }
+        //}
 
         public MainWindow() {
             
@@ -47,8 +54,12 @@ namespace screengrab
             // Hotkeys initialization
             screen = new Hotkey("screen", new List<Key> {Key.C, Key.LeftCtrl, Key.LeftShift });
             screenFast = new Hotkey("screenFast", new List<Key> { Key.X, Key.LeftCtrl, Key.LeftShift });
+            
+            //readSetting();
+        }
 
-            readSetting();
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) {
+            Properties.Settings.Default.Save();
         }
 
         void KListener_KeyDown(object sender, RawKeyEventArgs e) {
@@ -73,9 +84,11 @@ namespace screengrab
         }
         
         private void ChangeSettings(object sender, RoutedEventArgs e) {
-            writeSetting();
+            //writeSetting();
         }
-        
+
+       
+
         // Open CaptureWindow method
         public void OpenCaptureWindow(int settings) {
             CaptureWindow captureWindow = new CaptureWindow(settings);

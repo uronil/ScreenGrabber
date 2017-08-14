@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:screengrab"
         mc:Ignorable="d"
-        
+        Closing="Window_Closing"
         Title="Screen Grabber" Width="334" Height="450" Background="White" ResizeMode="CanMinimize">
     
     <Border Padding="10">
