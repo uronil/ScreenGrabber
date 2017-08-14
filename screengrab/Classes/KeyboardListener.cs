@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Threading;
 
-namespace screengrab
+namespace screengrab.Classes
 {
     /// <summary>
     /// Listens keyboard globally.

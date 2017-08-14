@@ -5,16 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using System.Xml.Serialization;
 
-namespace screengrab
+namespace screengrab.Classes
 {
-    [Serializable]
-    [XmlRoot("Hotkey")]
     public class Hotkey  {
-        public string name;
-        [XmlArray("hotkey"), XmlArrayItem(typeof(Key), ElementName = "Key")]
-        private List<Key> hotkey;
+        public string name { get; set; }
+        public List<Key> hotkey;
 
         public Hotkey() { }
         

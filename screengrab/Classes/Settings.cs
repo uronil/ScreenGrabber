@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace screengrab.Classes {
-    public class Fields {
+
+    public class Fields  {
         public String XMLFileName = Environment.CurrentDirectory + "\\settings.xml";
         public Hotkey screenToClipboard;
         public Hotkey screenWithEdit;
@@ -19,7 +20,12 @@ namespace screengrab.Classes {
         public bool startup;
         public bool openPictureInBrowser;
         public bool firstLoad;
+
+        public Fields() {
+
+        }
     }
+
     public class Settings {
 
         public Fields fields;
@@ -32,7 +38,6 @@ namespace screengrab.Classes {
             if (fields.firstLoad)
                 fields.firstLoad = false;
             XmlSerializer ser = new XmlSerializer(typeof(Fields));
-
             TextWriter writer = new StreamWriter(fields.XMLFileName);
             ser.Serialize(writer, fields);
             writer.Close();
