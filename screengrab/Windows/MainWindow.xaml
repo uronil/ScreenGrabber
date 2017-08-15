@@ -11,7 +11,7 @@
     <Border Padding="10">
         <Canvas>
             <Button  Content="Screen" Click="Button_Click" Width="189" Height="26"/>
-            <Button Content="Login" Canvas.Left="194" Width="102" Height="26"></Button>
+            <Button Content="Login" Canvas.Left="194" Width="102" Height="26" IsEnabled="False"></Button>
 
             <GroupBox Header="Shortcuts" Height="98" Canvas.Top="31" Width="296"/>
 

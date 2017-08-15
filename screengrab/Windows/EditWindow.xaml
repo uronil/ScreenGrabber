@@ -41,7 +41,7 @@
             <Button Grid.Column="1" 
                     Height="30" 
                     Width="30" 
-                    Margin="0,5">
+                    Margin="0,5" IsEnabled="False">
             </Button>
         </StackPanel>
 
@@ -57,7 +57,7 @@
             <Button Height="30" 
                     Width="68" 
                     Margin="5" 
-                    Content="Copy link">
+                    Content="Copy link" IsEnabled="False">
             </Button>
             <Button x:Name="CopyToClipboard" 
                     Click="CopyToClipboard_Click"

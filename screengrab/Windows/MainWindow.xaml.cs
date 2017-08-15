@@ -24,7 +24,7 @@ namespace screengrab
                 Properties.Settings.Default.LoadImagePath = System.AppDomain.CurrentDomain.BaseDirectory;
             }
 
-            // Crutch
+            // Crutch (ебаный костыль - russian jargon)
             Properties.Settings.Default.CaptureWindowOpened = false;
 
             // Set settings to elements
