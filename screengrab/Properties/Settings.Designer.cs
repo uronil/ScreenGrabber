@@ -34,9 +34,7 @@ namespace screengrab.Properties {
                 this["Hotkey"] = value;
             }
         }
-
-        // screengrab.Classes.Hotkey
-
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
@@ -106,6 +104,18 @@ namespace screengrab.Properties {
             }
             set {
                 this["LaunchCount"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool CaptureWindowOpened {
+            get {
+                return ((bool)(this["CaptureWindowOpened"]));
+            }
+            set {
+                this["CaptureWindowOpened"] = value;
             }
         }
     }

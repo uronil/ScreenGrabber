@@ -24,6 +24,9 @@ namespace screengrab
                 Properties.Settings.Default.LoadImagePath = System.AppDomain.CurrentDomain.BaseDirectory;
             }
 
+            // Crutch
+            Properties.Settings.Default.CaptureWindowOpened = false;
+
             // Set settings to elements
             ScreenToClipboard.Text = Properties.Settings.Default.Hotkey.ToString();
             ScreenWithEdit.Text = Properties.Settings.Default.HotkeyWithEdit.ToString();
@@ -54,9 +57,9 @@ namespace screengrab
                 pressedKeys.Add(e.Key);
 
             // Hotkey checking
-            if (Properties.Settings.Default.Hotkey.IsPressed(pressedKeys))
+            if (Properties.Settings.Default.Hotkey.IsPressed(pressedKeys) && !Properties.Settings.Default.CaptureWindowOpened)
                 OpenCaptureWindow(1);
-            if (Properties.Settings.Default.HotkeyWithEdit.IsPressed(pressedKeys))
+            if (Properties.Settings.Default.HotkeyWithEdit.IsPressed(pressedKeys) && !Properties.Settings.Default.CaptureWindowOpened)
                 OpenCaptureWindow(2);
 
             if (!ScreenToClipboard.IsEnabled) {
@@ -71,13 +74,13 @@ namespace screengrab
             if (!ScreenToClipboard.IsEnabled) {
                 ScreenToClipboard.Text = string.Join<Key>("+", pressedKeys);
                 ScreenToClipboard.IsEnabled = true;
-                ScreenToClipboard.BorderBrush = System.Windows.Media.Brushes.Blue;
+                ScreenToClipboard.BorderBrush = System.Windows.Media.Brushes.Gray;
                 Properties.Settings.Default.Hotkey.ChangeHotkey(pressedKeys);
             }
             if (!ScreenWithEdit.IsEnabled) {
                 ScreenWithEdit.Text = string.Join<Key>("+", pressedKeys);
                 ScreenWithEdit.IsEnabled = true;
-                ScreenWithEdit.BorderBrush = System.Windows.Media.Brushes.Blue;
+                ScreenWithEdit.BorderBrush = System.Windows.Media.Brushes.Gray;
                 Properties.Settings.Default.HotkeyWithEdit.ChangeHotkey(pressedKeys);
             }
 
@@ -102,8 +105,10 @@ namespace screengrab
         }
 
         // Open CaptureWindow method
+        CaptureWindow captureWindow;
         public void OpenCaptureWindow(int settings) {
-            CaptureWindow captureWindow = new CaptureWindow(settings);
+            captureWindow = new CaptureWindow(settings);
+            Properties.Settings.Default.CaptureWindowOpened = true;
             captureWindow.Show();
         }
 

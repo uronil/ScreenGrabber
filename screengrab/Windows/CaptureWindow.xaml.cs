@@ -27,7 +27,13 @@ namespace screengrab
         // Close window on Escape click
         private void Window_KeyDown(object sender, KeyEventArgs e) {
             if (e.Key == Key.Escape)
-                this.Close();
+                CloseWindow();
+            
+        }
+
+        public void CloseWindow() {
+            Properties.Settings.Default.CaptureWindowOpened = false;
+            this.Close();
         }
 
         public CaptureWindow(int inf) {
@@ -77,7 +83,7 @@ namespace screengrab
             
             canvas.Children.Remove(_rect);
             canvas.Children.Remove(img);
-            this.Close();
+            CloseWindow();
 
             CroppedBitmap cb = new CroppedBitmap(
                 (BitmapSource)img.Source, 
