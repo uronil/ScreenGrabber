@@ -55,11 +55,17 @@ namespace screengrab
             screen = new Hotkey("screen", new List<Key> {Key.C, Key.LeftCtrl, Key.LeftShift });
             screenFast = new Hotkey("screenFast", new List<Key> { Key.X, Key.LeftCtrl, Key.LeftShift });
 
+            //if (Properties.Settings.Default.screenshot.hotkey != null) {
+            //    screenFast = Properties.Settings.Default.screenshot;
+            //    ScreenToClipboard.Text = screenFast.ToString();
+            //}
+
+
             readSetting();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) {
-            //Properties.Settings.Default.Save();
+            Properties.Settings.Default.Save();
             writeSetting();
         }
 
@@ -77,10 +83,6 @@ namespace screengrab
             if (!ScreenToClipboard.IsEnabled) {
                 ScreenToClipboard.Text = string.Join<Key>("+", pressedKeys);
             }
-
-            Console.Write("Pressed: " + string.Join<Key>("+", pressedKeys));
-            Console.Write(" screen: " + screen.ToString() + " screenfast: " + screenFast.ToString());
-            Console.WriteLine();
         }
 
         void KListener_KeyUp(object sender, RawKeyEventArgs e) {
@@ -88,11 +90,10 @@ namespace screengrab
                 ScreenToClipboard.Text = string.Join<Key>("+", pressedKeys);
                 ScreenToClipboard.IsEnabled = true;
                 screenFast.ChangeHotkey(pressedKeys);
-                Console.WriteLine("!" + screenFast.ToString());
+                Properties.Settings.Default.screenshot = screenFast;
             }
             // Control pressed keys
             pressedKeys.Remove(e.Key);
-            
         }
 
         public void Button_Click(object sender, RoutedEventArgs e) {
@@ -106,6 +107,8 @@ namespace screengrab
         private void ScreenToClipboard_MouseDown(object sender, MouseButtonEventArgs e) {
             ScreenToClipboard.IsEnabled = false;
             ScreenToClipboard.Text = "Press keys combinations";
+
+            Console.WriteLine(sender.ToString());
         }
 
         // Open CaptureWindow method

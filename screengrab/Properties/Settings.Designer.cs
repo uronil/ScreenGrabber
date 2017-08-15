@@ -26,12 +26,12 @@ namespace screengrab.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Setting {
+        public screengrab.Classes.Hotkey screenshot {
             get {
-                return ((string)(this["Setting"]));
+                return ((screengrab.Classes.Hotkey)(this["screenshot"]));
             }
             set {
-                this["Setting"] = value;
+                this["screenshot"] = value;
             }
         }
     }
