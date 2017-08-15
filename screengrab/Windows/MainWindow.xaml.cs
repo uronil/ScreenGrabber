@@ -71,11 +71,13 @@ namespace screengrab
             if (!ScreenToClipboard.IsEnabled) {
                 ScreenToClipboard.Text = string.Join<Key>("+", pressedKeys);
                 ScreenToClipboard.IsEnabled = true;
+                ScreenToClipboard.BorderBrush = System.Windows.Media.Brushes.Blue;
                 Properties.Settings.Default.Hotkey.ChangeHotkey(pressedKeys);
             }
             if (!ScreenWithEdit.IsEnabled) {
                 ScreenWithEdit.Text = string.Join<Key>("+", pressedKeys);
                 ScreenWithEdit.IsEnabled = true;
+                ScreenWithEdit.BorderBrush = System.Windows.Media.Brushes.Blue;
                 Properties.Settings.Default.HotkeyWithEdit.ChangeHotkey(pressedKeys);
             }
 
@@ -88,11 +90,13 @@ namespace screengrab
         }
         
         private void ScreenToClipboard_MouseDown(object sender, MouseButtonEventArgs e) {
+            ScreenToClipboard.BorderBrush = System.Windows.Media.Brushes.Red;
             ScreenToClipboard.IsEnabled = false;
             ScreenToClipboard.Text = "Press keys combinations";
         }
 
         private void ScreenWithEdit_PreviewMouseDown(object sender, MouseButtonEventArgs e) {
+            ScreenWithEdit.BorderBrush = System.Windows.Media.Brushes.Red;
             ScreenWithEdit.IsEnabled = false;
             ScreenWithEdit.Text = "Press keys combinations";
         }

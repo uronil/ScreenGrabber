@@ -23,7 +23,7 @@
 
             <GroupBox Header="Images" Height="123" Canvas.Top="134" Width="296"/>
 
-            <CheckBox Checked="LoadImagesToDiskCheckBox_Checked" x:Name="LoadImagesToDiskCheckBox" RenderTransformOrigin="0.836,0.904" Canvas.Left="10" Canvas.Top="152" Height="26" VerticalContentAlignment="Center" Width="138" Padding="0" >
+            <CheckBox Click="LoadImagesToDiskCheckBox_Checked" x:Name="LoadImagesToDiskCheckBox" RenderTransformOrigin="0.836,0.904" Canvas.Left="10" Canvas.Top="152" Height="26" VerticalContentAlignment="Center" Width="138" Padding="0" >
                 <Label Content="Load images to disk" Canvas.Left="26" Canvas.Top="152" Width="120" Padding="5"></Label>
             </CheckBox>
 
@@ -39,7 +39,7 @@
 
             <GroupBox Header="Options" Height="130" Canvas.Top="263" Width="296"/>
 
-            <CheckBox Checked="StartupCheckBox_Checked" x:Name="StartupCheckBox" RenderTransformOrigin="0.836,0.904" Canvas.Left="10" Canvas.Top="282" Height="26" VerticalContentAlignment="Center" Width="109" Padding="0">
+            <CheckBox Click="StartupCheckBox_Checked" x:Name="StartupCheckBox" RenderTransformOrigin="0.836,0.904" Canvas.Left="10" Canvas.Top="282" Height="26" VerticalContentAlignment="Center" Width="109" Padding="0">
                 <Label Content="Startup" Canvas.Left="26" Canvas.Top="152" Width="99" Padding="5"></Label>
             </CheckBox>
             <Label x:Name="link_website" Content="Link to website" Canvas.Left="10" Canvas.Top="334" Width="99" Padding="1,5,5,5" Cursor="Hand" Background="White" Foreground="#FF0074FF"></Label>
