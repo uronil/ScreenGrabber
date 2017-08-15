@@ -26,12 +26,86 @@ namespace screengrab.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public screengrab.Classes.Hotkey screenshot {
+        public screengrab.Classes.Hotkey Hotkey {
             get {
-                return ((screengrab.Classes.Hotkey)(this["screenshot"]));
+                return ((screengrab.Classes.Hotkey)(this["Hotkey"]));
             }
             set {
-                this["screenshot"] = value;
+                this["Hotkey"] = value;
+            }
+        }
+
+        // screengrab.Classes.Hotkey
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public screengrab.Classes.Hotkey HotkeyWithEdit {
+            get {
+                return ((screengrab.Classes.Hotkey)(this["HotkeyWithEdit"]));
+            }
+            set {
+                this["HotkeyWithEdit"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool LoadToDisk {
+            get {
+                return ((bool)(this["LoadToDisk"]));
+            }
+            set {
+                this["LoadToDisk"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int ImageFormat {
+            get {
+                return ((int)(this["ImageFormat"]));
+            }
+            set {
+                this["ImageFormat"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Startup {
+            get {
+                return ((bool)(this["Startup"]));
+            }
+            set {
+                this["Startup"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LoadImagePath {
+            get {
+                return ((string)(this["LoadImagePath"]));
+            }
+            set {
+                this["LoadImagePath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int LaunchCount {
+            get {
+                return ((int)(this["LaunchCount"]));
+            }
+            set {
+                this["LaunchCount"] = value;
             }
         }
     }

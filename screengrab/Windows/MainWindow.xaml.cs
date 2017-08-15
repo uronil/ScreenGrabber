@@ -5,6 +5,8 @@ using System.Windows.Input;
 using System.Linq;
 using System.Collections;
 using screengrab.Classes;
+using System.Windows.Forms;
+using System.IO;
 
 namespace screengrab
 {
@@ -14,59 +16,36 @@ namespace screengrab
         List<Key> pressedKeys;
         KeyboardListener KListener = new KeyboardListener();
 
-        // Hotkeys
-        Hotkey screen, screenFast;
+        public void SetSettings() {
+            // First launch, set default settings
+            if (Properties.Settings.Default.LaunchCount == 0) {
+                Properties.Settings.Default.Hotkey = new Hotkey("screen", new List<Key> { Key.X, Key.LeftCtrl, Key.LeftShift });
+                Properties.Settings.Default.HotkeyWithEdit = new Hotkey("screenFast", new List<Key> { Key.C, Key.LeftCtrl, Key.LeftShift });
+                Properties.Settings.Default.LoadImagePath = System.AppDomain.CurrentDomain.BaseDirectory;
+            }
 
-        Settings settings = new Settings();
+            // Set settings to elements
+            ScreenToClipboard.Text = Properties.Settings.Default.Hotkey.ToString();
+            ScreenWithEdit.Text = Properties.Settings.Default.HotkeyWithEdit.ToString();
 
-        private void writeSetting() {
-            settings.fields.loadImageToDisk = LoadImagesToDiskCheckBox.IsChecked.Value;
-            settings.fields.imageFormat = ImageFormatComboBox.SelectedIndex;
-            settings.fields.startup = StartupCheckBox.IsChecked.Value;
-            settings.fields.openPictureInBrowser = OpenInBrowserCheckBox.IsChecked.Value;
-            settings.WriteXml();
-        }
+            LoadImagesToDiskCheckBox.IsChecked = Properties.Settings.Default.LoadToDisk;
+            LoadImagePathTextBox.Text = Properties.Settings.Default.LoadImagePath;
+            ImageFormatComboBox.SelectedIndex = Properties.Settings.Default.ImageFormat;
+            StartupCheckBox.IsChecked = Properties.Settings.Default.Startup;
 
-        private void readSetting() {
-            settings.ReadXml();
-            LoadImagesToDiskCheckBox.IsChecked = settings.fields.loadImageToDisk;
-            ImageFormatComboBox.SelectedIndex = settings.fields.imageFormat;
-            StartupCheckBox.IsChecked = settings.fields.startup;
-            OpenInBrowserCheckBox.IsChecked = settings.fields.openPictureInBrowser;
-        }
-
-        public void FirstLaunch() {
-            //if (settings.fields.firstLoad) {
-            //    Properties.Settings.Default.HotkeyScreen = new Hotkey("screen", new List<Key> { Key.C, Key.LeftCtrl, Key.LeftShift });
-            //    Properties.Settings.Default.HotkeyScreenFast = new Hotkey("screenFast", new List<Key> { Key.X, Key.LeftCtrl, Key.LeftShift });
-            //}
-        }
-
-        public MainWindow() {
-            
-            InitializeComponent();
-            
             // Keyboard initialization
             pressedKeys = new List<Key>();
             KListener.KeyDown += new RawKeyEventHandler(KListener_KeyDown);
             KListener.KeyUp += new RawKeyEventHandler(KListener_KeyUp);
+        }
 
-            // Hotkeys initialization
-            screen = new Hotkey("screen", new List<Key> {Key.C, Key.LeftCtrl, Key.LeftShift });
-            screenFast = new Hotkey("screenFast", new List<Key> { Key.X, Key.LeftCtrl, Key.LeftShift });
-
-            //if (Properties.Settings.Default.screenshot.hotkey != null) {
-            //    screenFast = Properties.Settings.Default.screenshot;
-            //    ScreenToClipboard.Text = screenFast.ToString();
-            //}
-
-
-            readSetting();
+        public MainWindow() {
+            InitializeComponent();
+            SetSettings();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) {
             Properties.Settings.Default.Save();
-            writeSetting();
         }
 
         void KListener_KeyDown(object sender, RawKeyEventArgs e) {
@@ -75,13 +54,16 @@ namespace screengrab
                 pressedKeys.Add(e.Key);
 
             // Hotkey checking
-            if (screen.IsPressed(pressedKeys))
+            if (Properties.Settings.Default.Hotkey.IsPressed(pressedKeys))
                 OpenCaptureWindow(1);
-            if (screenFast.IsPressed(pressedKeys))
+            if (Properties.Settings.Default.HotkeyWithEdit.IsPressed(pressedKeys))
                 OpenCaptureWindow(2);
 
             if (!ScreenToClipboard.IsEnabled) {
                 ScreenToClipboard.Text = string.Join<Key>("+", pressedKeys);
+            }
+            if (!ScreenWithEdit.IsEnabled) {
+                ScreenWithEdit.Text = string.Join<Key>("+", pressedKeys);
             }
         }
 
@@ -89,9 +71,14 @@ namespace screengrab
             if (!ScreenToClipboard.IsEnabled) {
                 ScreenToClipboard.Text = string.Join<Key>("+", pressedKeys);
                 ScreenToClipboard.IsEnabled = true;
-                screenFast.ChangeHotkey(pressedKeys);
-                Properties.Settings.Default.screenshot = screenFast;
+                Properties.Settings.Default.Hotkey.ChangeHotkey(pressedKeys);
             }
+            if (!ScreenWithEdit.IsEnabled) {
+                ScreenWithEdit.Text = string.Join<Key>("+", pressedKeys);
+                ScreenWithEdit.IsEnabled = true;
+                Properties.Settings.Default.HotkeyWithEdit.ChangeHotkey(pressedKeys);
+            }
+
             // Control pressed keys
             pressedKeys.Remove(e.Key);
         }
@@ -100,21 +87,47 @@ namespace screengrab
             OpenCaptureWindow(0);
         }
         
-        private void ChangeSettings(object sender, RoutedEventArgs e) {
-            writeSetting();
-        }
-
         private void ScreenToClipboard_MouseDown(object sender, MouseButtonEventArgs e) {
             ScreenToClipboard.IsEnabled = false;
             ScreenToClipboard.Text = "Press keys combinations";
+        }
 
-            Console.WriteLine(sender.ToString());
+        private void ScreenWithEdit_PreviewMouseDown(object sender, MouseButtonEventArgs e) {
+            ScreenWithEdit.IsEnabled = false;
+            ScreenWithEdit.Text = "Press keys combinations";
         }
 
         // Open CaptureWindow method
         public void OpenCaptureWindow(int settings) {
             CaptureWindow captureWindow = new CaptureWindow(settings);
             captureWindow.Show();
+        }
+
+        private void LoadImagesToDiskCheckBox_Checked(object sender, RoutedEventArgs e) {
+            Properties.Settings.Default.LoadToDisk = (bool)LoadImagesToDiskCheckBox.IsChecked;
+            Properties.Settings.Default.Save();
+        }
+
+        private void ImageFormatComboBox_LostFocus(object sender, RoutedEventArgs e) {
+            Properties.Settings.Default.ImageFormat = ImageFormatComboBox.SelectedIndex;
+            Properties.Settings.Default.Save();
+        }
+
+        private void StartupCheckBox_Checked(object sender, RoutedEventArgs e) {
+            Properties.Settings.Default.Startup = (bool)StartupCheckBox.IsChecked;
+            Properties.Settings.Default.Save();
+        }
+        
+        private void ButtonImagePath_Click(object sender, RoutedEventArgs e) {
+            FolderBrowserDialog folderBrowser = new FolderBrowserDialog();
+
+            DialogResult result = folderBrowser.ShowDialog();
+
+            if (!string.IsNullOrWhiteSpace(folderBrowser.SelectedPath)) {
+                string path = folderBrowser.SelectedPath + "\\";
+                LoadImagePathTextBox.Text = path;
+                Properties.Settings.Default.LoadImagePath = path;
+            }
         }
     }
 }

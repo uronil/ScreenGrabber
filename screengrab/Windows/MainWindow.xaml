@@ -18,20 +18,20 @@
             <TextBox PreviewMouseDown="ScreenToClipboard_MouseDown"  x:Name="ScreenToClipboard" Text="CTRL+SHIFT+X" Canvas.Top="55" Width="169" Height="26" VerticalContentAlignment="Center" Canvas.Left="10" Cursor="Hand"/>
             <Label Content="Screen to clipboard" Canvas.Left="184" Canvas.Top="55" Width="112" Padding="0,5,5,5"></Label>
 
-            <TextBox PreviewMouseDown="ScreenToClipboard_MouseDown" x:Name="ScreenWithEdit" Text="CTRL+SHIFT+C" Canvas.Top="86" Width="169" Height="26" VerticalContentAlignment="Center" Canvas.Left="10" Cursor="Hand"></TextBox>
+            <TextBox PreviewMouseDown="ScreenWithEdit_PreviewMouseDown" x:Name="ScreenWithEdit" Text="CTRL+SHIFT+C" Canvas.Top="86" Width="169" Height="26" VerticalContentAlignment="Center" Canvas.Left="10" Cursor="Hand"></TextBox>
             <Label Content="Screen with edit" Canvas.Left="184" Canvas.Top="86" Width="112" Padding="0,5,5,5"></Label>
 
             <GroupBox Header="Images" Height="123" Canvas.Top="134" Width="296"/>
 
-            <CheckBox Click="ChangeSettings" x:Name="LoadImagesToDiskCheckBox" RenderTransformOrigin="0.836,0.904" Canvas.Left="10" Canvas.Top="152" Height="26" VerticalContentAlignment="Center" Width="138" Padding="0" >
+            <CheckBox Checked="LoadImagesToDiskCheckBox_Checked" x:Name="LoadImagesToDiskCheckBox" RenderTransformOrigin="0.836,0.904" Canvas.Left="10" Canvas.Top="152" Height="26" VerticalContentAlignment="Center" Width="138" Padding="0" >
                 <Label Content="Load images to disk" Canvas.Left="26" Canvas.Top="152" Width="120" Padding="5"></Label>
             </CheckBox>
 
             <TextBox x:Name="LoadImagePathTextBox" Text="C:\Program Files\Unity\Editor\Data\il2cpp" Canvas.Top="183" Width="218" Height="26" VerticalContentAlignment="Center" Canvas.Left="10"></TextBox>
-            <Button Content="More..." Canvas.Left="233" Width="51" Height="26" Canvas.Top="183"></Button>
+            <Button Click="ButtonImagePath_Click" x:Name="ButtonImagePath"  Content="More..." Canvas.Left="233" Width="51" Height="26" Canvas.Top="183"></Button>
 
             <Label Content="Image format" Canvas.Top="214" Width="81" Canvas.Left="10" Padding="0,5,5,5"/>
-            <ComboBox LostFocus="ChangeSettings" x:Name="ImageFormatComboBox" Canvas.Left="194" Canvas.Top="214" Width="90" Height="26" SelectedIndex="0" VerticalContentAlignment="Center" >
+            <ComboBox LostFocus="ImageFormatComboBox_LostFocus" x:Name="ImageFormatComboBox" Canvas.Left="194" Canvas.Top="214" Width="90" Height="26" SelectedIndex="0" VerticalContentAlignment="Center" >
                 <ComboBoxItem Content="PNG"/>
                 <ComboBoxItem Content="JPG"/>
                 <ComboBoxItem Content="BMP"/>
@@ -39,11 +39,8 @@
 
             <GroupBox Header="Options" Height="130" Canvas.Top="263" Width="296"/>
 
-            <CheckBox Click="ChangeSettings" x:Name="StartupCheckBox" RenderTransformOrigin="0.836,0.904" Canvas.Left="10" Canvas.Top="282" Height="26" VerticalContentAlignment="Center" Width="109" Padding="0">
+            <CheckBox Checked="StartupCheckBox_Checked" x:Name="StartupCheckBox" RenderTransformOrigin="0.836,0.904" Canvas.Left="10" Canvas.Top="282" Height="26" VerticalContentAlignment="Center" Width="109" Padding="0">
                 <Label Content="Startup" Canvas.Left="26" Canvas.Top="152" Width="99" Padding="5"></Label>
-            </CheckBox>
-            <CheckBox Click="ChangeSettings" x:Name="OpenInBrowserCheckBox" RenderTransformOrigin="0.836,0.904" Canvas.Left="10" Canvas.Top="308" Height="26" VerticalContentAlignment="Center" Width="179" Padding="0">
-                <Label Content="Open picture in browser" Canvas.Left="26" Canvas.Top="152" Width="169" Padding="5" RenderTransformOrigin="0.508,0.502"></Label>
             </CheckBox>
             <Label x:Name="link_website" Content="Link to website" Canvas.Left="10" Canvas.Top="334" Width="99" Padding="1,5,5,5" Cursor="Hand" Background="White" Foreground="#FF0074FF"></Label>
             <Label x:Name="link_profile" Content="Link to your profile" Canvas.Left="10" Canvas.Top="360" Width="274" Padding="1,5,5,5" Cursor="Hand" Background="White" Foreground="#FF0074FF"></Label>
