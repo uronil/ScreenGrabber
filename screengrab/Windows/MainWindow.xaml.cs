@@ -73,11 +73,26 @@ namespace screengrab
                 OpenCaptureWindow(1);
             if (screenFast.IsPressed(pressedKeys))
                 OpenCaptureWindow(2);
+
+            if (!ScreenToClipboard.IsEnabled) {
+                ScreenToClipboard.Text = string.Join<Key>("+", pressedKeys);
+            }
+
+            Console.Write("Pressed: " + string.Join<Key>("+", pressedKeys));
+            Console.Write(" screen: " + screen.ToString() + " screenfast: " + screenFast.ToString());
+            Console.WriteLine();
         }
 
         void KListener_KeyUp(object sender, RawKeyEventArgs e) {
+            if (!ScreenToClipboard.IsEnabled) {
+                ScreenToClipboard.Text = string.Join<Key>("+", pressedKeys);
+                ScreenToClipboard.IsEnabled = true;
+                screenFast.ChangeHotkey(pressedKeys);
+                Console.WriteLine("!" + screenFast.ToString());
+            }
             // Control pressed keys
             pressedKeys.Remove(e.Key);
+            
         }
 
         public void Button_Click(object sender, RoutedEventArgs e) {
@@ -87,7 +102,12 @@ namespace screengrab
         private void ChangeSettings(object sender, RoutedEventArgs e) {
             writeSetting();
         }
-        
+
+        private void ScreenToClipboard_MouseDown(object sender, MouseButtonEventArgs e) {
+            ScreenToClipboard.IsEnabled = false;
+            ScreenToClipboard.Text = "Press keys combinations";
+        }
+
         // Open CaptureWindow method
         public void OpenCaptureWindow(int settings) {
             CaptureWindow captureWindow = new CaptureWindow(settings);

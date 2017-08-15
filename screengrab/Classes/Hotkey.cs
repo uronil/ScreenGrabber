@@ -19,6 +19,13 @@ namespace screengrab.Classes
             this.hotkey = hotkey;
         }
 
+        public void ChangeHotkey(List<Key> hotkey) {
+            this.hotkey.Clear();
+            foreach(Key k in hotkey) {
+                this.hotkey.Add(k);
+            }
+        }
+
         public bool IsPressed(List<Key> pressedKeys) {
             bool temp = true;
             foreach(Key k in this.hotkey) {
