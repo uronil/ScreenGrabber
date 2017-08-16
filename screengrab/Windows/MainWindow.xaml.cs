@@ -153,7 +153,7 @@ namespace screengrab
         }
 
         private void ImageFormatComboBox_LostFocus(object sender, RoutedEventArgs e) {
-            Properties.Settings.Default.ImageFormat = ImageFormatComboBox.SelectedIndex;
+            Properties.Settings.Default.ImageFormat = ImageFormatComboBox.SelectedIndex + 1;
             Properties.Settings.Default.Save();
         }
 

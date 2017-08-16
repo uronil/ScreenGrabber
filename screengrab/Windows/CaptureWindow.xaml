@@ -23,6 +23,8 @@
             </StackPanel>
 
         </Canvas>
+
+        <Canvas x:Name="tempcanvas"></Canvas>
         
         <Border BorderBrush="Red"
                 BorderThickness="2"

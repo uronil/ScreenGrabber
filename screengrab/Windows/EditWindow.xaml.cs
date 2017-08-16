@@ -26,7 +26,6 @@ namespace screengrab.Windows
             editCanvas.Children.Add(this.image);
             ConfigurateWindowSize(this.image);
             paintType = PaintType.Pencil;
-            
         }
 
         void ConfigurateWindowSize(Image image) {
@@ -53,7 +52,7 @@ namespace screengrab.Windows
         }
 
         private void CopyToClipboard_Click(object sender, RoutedEventArgs e) {
-            Clipboard.SetImage(GetImageFromCanvas(editCanvas,1).Frames[0]);
+            Clipboard.SetImage(GetImageFromCanvas(editCanvas, Properties.Settings.Default.ImageFormat).Frames[0]);
             this.Close();
         }
 
@@ -70,7 +69,7 @@ namespace screengrab.Windows
             }
         }
         
-        public BitmapEncoder GetImageFromCanvas( Canvas surface, int format) {
+        public BitmapEncoder GetImageFromCanvas(Canvas surface, int format) {
            
             // Get the size of canvas
             Size size = new Size(surface.Width, surface.Height);

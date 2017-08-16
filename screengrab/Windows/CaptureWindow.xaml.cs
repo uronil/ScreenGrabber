@@ -24,11 +24,12 @@ namespace screengrab
         // Desktop screenshot
         Image img = new Image();
 
+        int instaScreen = 0;
+
         // Close window on Escape click
         private void Window_KeyDown(object sender, KeyEventArgs e) {
             if (e.Key == Key.Escape)
                 CloseWindow();
-            
         }
 
         public void CloseWindow() {
@@ -38,6 +39,8 @@ namespace screengrab
 
         public CaptureWindow(int inf) {
             InitializeComponent();
+
+            instaScreen = inf;
 
             screenLeft = SystemParameters.VirtualScreenLeft;
             screenTop = SystemParameters.VirtualScreenTop;
@@ -80,7 +83,7 @@ namespace screengrab
 
         private void MouseUp(object sender, MouseButtonEventArgs e) {
             first = false;
-            
+
             canvas.Children.Remove(_rect);
             canvas.Children.Remove(img);
             CloseWindow();
@@ -92,10 +95,53 @@ namespace screengrab
             Image croppedImage = new Image();
             croppedImage.Source = cb;
 
-            EditWindow editWindow = new EditWindow(croppedImage);
-            editWindow.Show();
+            if (instaScreen == 1) {
+                Clipboard.SetImage(GetImage(croppedImage, Properties.Settings.Default.ImageFormat).Frames[0]);
+                tempcanvas.Children.Remove(croppedImage);
+
+                this.Close();
+            } else {
+                
+                EditWindow editWindow = new EditWindow(croppedImage);
+                editWindow.Show();
+            }
         }
-        
+
+        public BitmapEncoder GetImage(Image surface, int format) {
+
+            // Get the size of canvas
+            Size size = new Size(surface.Width, surface.Height);
+            Console.WriteLine(surface.Width + surface.Height);
+
+            var scale = 1;//100/96d;
+            surface.Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
+            var sz = surface.DesiredSize;
+            var rect = new Rect(sz);
+            surface.Arrange(rect);
+            var bmp = new RenderTargetBitmap((int)(scale * (rect.Width)),
+                                             (int)(scale * (rect.Height)),
+                                              scale * 96,
+                                              scale * 96,
+                                              PixelFormats.Default);
+            bmp.Render(surface);
+
+            BitmapEncoder enc = null;
+            switch (format) {
+                case 1: // PNG
+                    enc = new PngBitmapEncoder();
+                    break;
+                case 2: // JPG
+                    enc = new JpegBitmapEncoder();
+                    break;
+                case 3: // BMP
+                    enc = new BmpBitmapEncoder();
+                    break;
+            }
+
+            enc.Frames.Add(BitmapFrame.Create(bmp));
+            return enc;
+        }
+
         private void MouseDown(object sender, MouseButtonEventArgs e) {
             if (e.ButtonState == MouseButtonState.Pressed)
                 currentPoint = e.GetPosition(this);
