@@ -104,7 +104,7 @@ namespace screengrab
                 firstClick = e.GetPosition(this);
 
                 _rect = new Rectangle {
-                    Stroke = Brushes.White,
+                    Stroke = Brushes.Red,
                     StrokeThickness = 1,
                     Fill = new SolidColorBrush(Color.FromArgb(75, 255, 255, 255))
                 };

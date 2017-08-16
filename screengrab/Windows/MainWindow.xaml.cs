@@ -7,6 +7,7 @@ using System.Collections;
 using screengrab.Classes;
 using System.Windows.Forms;
 using System.IO;
+using Hardcodet.Wpf.TaskbarNotification;
 
 namespace screengrab
 {
@@ -16,6 +17,14 @@ namespace screengrab
         List<Key> pressedKeys;
         KeyboardListener KListener = new KeyboardListener();
 
+        private NotifyIcon trayIcon;
+        private ContextMenu trayMenu;
+
+        public MainWindow() {
+            InitializeComponent();
+            SetSettings();
+        }
+        
         public void SetSettings() {
             // First launch, set default settings
             if (Properties.Settings.Default.LaunchCount == 0) {
@@ -40,17 +49,43 @@ namespace screengrab
             pressedKeys = new List<Key>();
             KListener.KeyDown += new RawKeyEventHandler(KListener_KeyDown);
             KListener.KeyUp += new RawKeyEventHandler(KListener_KeyUp);
+
+            // Launch application minimized
+            WindowState = WindowState.Minimized;
+            this.Hide();
+            
+            // Create a tray icon
+            trayIcon = new NotifyIcon();
+            trayIcon.Text = "ScreenGrab";
+            trayIcon.Icon = Properties.Resources.favicon;
+
+            // Add menu to tray icon and show it
+            trayIcon.ContextMenu = trayMenu;
+            trayIcon.Visible = true;
+            trayIcon.MouseClick += TrayIcon_MouseClick;
         }
 
-        public MainWindow() {
-            InitializeComponent();
-            SetSettings();
+        private void TrayIcon_MouseClick(object sender, System.Windows.Forms.MouseEventArgs e) {
+            if (e.Button == MouseButtons.Left)
+                OpenCaptureWindow(0);
+            if (e.Button == MouseButtons.Right) {
+                this.Show();
+                WindowState = WindowState.Normal;
+            }   
+        }
+
+        // Minimize to system tray when applicaiton is minimized
+        protected override void OnStateChanged(EventArgs e) {
+            if (WindowState == WindowState.Minimized) this.Hide();
+
+            base.OnStateChanged(e);
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) {
             Properties.Settings.Default.Save();
+            System.Windows.Application.Current.Shutdown();
         }
-
+        
         void KListener_KeyDown(object sender, RawKeyEventArgs e) {
             // Control pressed keys
             if (!pressedKeys.Contains(e.Key))
