@@ -1,4 +1,5 @@
-﻿using screengrab.Windows;
+﻿using screengrab.Classes;
+using screengrab.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -96,46 +97,11 @@ namespace screengrab
             croppedImage.Source = cb;
 
             if (instaScreen == 1) {
-                Clipboard.SetImage(GetImage(croppedImage, Properties.Settings.Default.ImageFormat).Frames[0]);
-                tempcanvas.Children.Remove(croppedImage);
+                ImageConverter.CopyToClipboard(croppedImage, Properties.Settings.Default.ImageFormat);
             } else {
                 EditWindow editWindow = new EditWindow(croppedImage);
                 editWindow.Show();
             }
-        }
-
-        public BitmapEncoder GetImage(Image surface, int format) {
-
-            // Get the size of canvas
-            Size size = new Size(surface.Width, surface.Height);
-
-            var scale = 1;//100/96d;
-            surface.Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
-            var sz = surface.DesiredSize;
-            var rect = new Rect(sz);
-            surface.Arrange(rect);
-            var bmp = new RenderTargetBitmap((int)(scale * (rect.Width)),
-                                             (int)(scale * (rect.Height)),
-                                              scale * 96,
-                                              scale * 96,
-                                              PixelFormats.Default);
-            bmp.Render(surface);
-
-            BitmapEncoder enc = null;
-            switch (format) {
-                case 1: // PNG
-                    enc = new PngBitmapEncoder();
-                    break;
-                case 2: // JPG
-                    enc = new JpegBitmapEncoder();
-                    break;
-                case 3: // BMP
-                    enc = new BmpBitmapEncoder();
-                    break;
-            }
-
-            enc.Frames.Add(BitmapFrame.Create(bmp));
-            return enc;
         }
 
         private void MouseDown(object sender, MouseButtonEventArgs e) {

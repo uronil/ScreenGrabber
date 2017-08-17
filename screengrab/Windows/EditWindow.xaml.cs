@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using screengrab.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,7 +53,7 @@ namespace screengrab.Windows
         }
 
         private void CopyToClipboard_Click(object sender, RoutedEventArgs e) {
-            Clipboard.SetImage(GetImageFromCanvas(editCanvas, Properties.Settings.Default.ImageFormat).Frames[0]);
+            ImageConverter.CopyToClipboard(editCanvas, Properties.Settings.Default.ImageFormat);
             this.Close();
         }
 
@@ -62,49 +63,16 @@ namespace screengrab.Windows
             saveFileDialog.DefaultExt = ".png"; // Default file extension
             saveFileDialog.Filter = "Png (*.png)|*.png|JPG(*.jpg)|*.jpg|BMP (*.bmp)|*.bmp";
             if (saveFileDialog.ShowDialog() == true) {
-                BitmapEncoder enc = GetImageFromCanvas(editCanvas, saveFileDialog.FilterIndex);
-                using (var stm = System.IO.File.Create(saveFileDialog.FileName)) {
-                    enc.Save(stm); // Saving image
-                }
+                ImageConverter.SaveImageTo(
+                    saveFileDialog.FilterIndex,
+                    saveFileDialog.FileName,
+                    editCanvas);
             }
-        }
-        
-        public BitmapEncoder GetImageFromCanvas(Canvas surface, int format) {
-           
-            // Get the size of canvas
-            Size size = new Size(surface.Width, surface.Height);
-            
-            var scale = 1;//100/96d;
-            surface.Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
-            var sz = surface.DesiredSize;
-            var rect = new Rect(sz);
-            surface.Arrange(rect);
-            var bmp = new RenderTargetBitmap((int)(scale * (rect.Width)),
-                                             (int)(scale * (rect.Height)),
-                                              scale * 96,
-                                              scale * 96,
-                                              PixelFormats.Default);
-            bmp.Render(surface);
-            
-            BitmapEncoder enc = null;
-            switch (format) {
-                case 1: // PNG
-                    enc = new PngBitmapEncoder();
-                    break;
-                case 2: // JPG
-                    enc = new JpegBitmapEncoder();
-                    break;
-                case 3: // BMP
-                    enc = new BmpBitmapEncoder();
-                    break;
-            }
-
-            enc.Frames.Add(BitmapFrame.Create(bmp));
-            return enc;
         }
 
         // For painting by pencil
         Point currentPoint = new Point();
+        bool first = false;
 
         // For painting by rectangle
         Point firstPoint = new Point();
@@ -122,7 +90,7 @@ namespace screengrab.Windows
             }
             switch (paintType) {
                 case PaintType.Pencil:
-                    
+                    first = false;
                     break;
 
                 case PaintType.Rect:
@@ -140,18 +108,14 @@ namespace screengrab.Windows
                     break;
             }
         }
-
+        
         private void editCanvas_MouseMove(object sender, MouseEventArgs e) {
             if (e.LeftButton == MouseButtonState.Pressed) {
                 switch(paintType) {
                     case PaintType.Pencil:
-
+                        
                         Line line = new Line();
-                        //bool shiftPressed = false;
-                        //if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift)) {
-                        //    shiftPressed = true;
-                        //}
-
+                        
                         line.Stroke = new SolidColorBrush(Colors.Red);
                         line.StrokeThickness = 3;
                         line.X1 = currentPoint.X;
@@ -159,6 +123,18 @@ namespace screengrab.Windows
                         line.X2 = e.GetPosition(this).X;
                         line.Y2 = e.GetPosition(this).Y;
                         
+                        if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift)) {
+                            if (!first) {
+                                firstPoint = e.GetPosition(this);
+                                first = true;
+                            }
+                                
+                            line.Y1 = firstPoint.Y;
+                            line.Y2 = firstPoint.Y;
+                        } else {
+                            first = false;
+                        }
+
                         currentPoint = e.GetPosition(this);
 
                         editCanvas.Children.Add(line);
@@ -199,7 +175,5 @@ namespace screengrab.Windows
         private void ButtonPaintRect_Click(object sender, RoutedEventArgs e) {
             paintType = PaintType.Rect;
         }
-
-        
     }
 }
