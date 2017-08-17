@@ -36,6 +36,9 @@ namespace screengrab
             // Crutch (ебаный костыль - russian jargon)
             Properties.Settings.Default.CaptureWindowOpened = false;
 
+            // Statistic
+            Properties.Settings.Default.LaunchCount++;
+
             // Set settings to elements
             ScreenToClipboard.Text = Properties.Settings.Default.Hotkey.ToString();
             ScreenWithEdit.Text = Properties.Settings.Default.HotkeyWithEdit.ToString();
@@ -77,7 +80,6 @@ namespace screengrab
         // Minimize to system tray when applicaiton is minimized
         protected override void OnStateChanged(EventArgs e) {
             if (WindowState == WindowState.Minimized) this.Hide();
-
             base.OnStateChanged(e);
         }
 
@@ -92,31 +94,35 @@ namespace screengrab
                 pressedKeys.Add(e.Key);
 
             // Hotkey checking
-            if (Properties.Settings.Default.Hotkey.IsPressed(pressedKeys) && !Properties.Settings.Default.CaptureWindowOpened)
-                OpenCaptureWindow(1);
-            if (Properties.Settings.Default.HotkeyWithEdit.IsPressed(pressedKeys) && !Properties.Settings.Default.CaptureWindowOpened)
-                OpenCaptureWindow(2);
-
+            if (!setHotkeys) {
+                if (Properties.Settings.Default.Hotkey.IsPressed(pressedKeys) && !Properties.Settings.Default.CaptureWindowOpened)
+                    OpenCaptureWindow(1);
+                if (Properties.Settings.Default.HotkeyWithEdit.IsPressed(pressedKeys) && !Properties.Settings.Default.CaptureWindowOpened)
+                    OpenCaptureWindow(2);
+            }
+            
             if (!ScreenToClipboard.IsEnabled) {
-                ScreenToClipboard.Text = string.Join<Key>("+", pressedKeys);
+                ScreenToClipboard.Text = string.Join<Key>(" + ", pressedKeys);
             }
             if (!ScreenWithEdit.IsEnabled) {
-                ScreenWithEdit.Text = string.Join<Key>("+", pressedKeys);
+                ScreenWithEdit.Text = string.Join<Key>(" + ", pressedKeys);
             }
         }
 
         void KListener_KeyUp(object sender, RawKeyEventArgs e) {
             if (!ScreenToClipboard.IsEnabled) {
-                ScreenToClipboard.Text = string.Join<Key>("+", pressedKeys);
                 ScreenToClipboard.IsEnabled = true;
+                setHotkeys = false;
                 ScreenToClipboard.BorderBrush = System.Windows.Media.Brushes.Gray;
                 Properties.Settings.Default.Hotkey.ChangeHotkey(pressedKeys);
+                ScreenToClipboard.Text = Properties.Settings.Default.Hotkey.ToString();
             }
             if (!ScreenWithEdit.IsEnabled) {
-                ScreenWithEdit.Text = string.Join<Key>("+", pressedKeys);
                 ScreenWithEdit.IsEnabled = true;
+                setHotkeys = false;
                 ScreenWithEdit.BorderBrush = System.Windows.Media.Brushes.Gray;
                 Properties.Settings.Default.HotkeyWithEdit.ChangeHotkey(pressedKeys);
+                ScreenWithEdit.Text = Properties.Settings.Default.HotkeyWithEdit.ToString();
             }
 
             // Control pressed keys
@@ -126,15 +132,19 @@ namespace screengrab
         public void Button_Click(object sender, RoutedEventArgs e) {
             OpenCaptureWindow(0);
         }
-        
+
+        bool setHotkeys = false;
+
         private void ScreenToClipboard_MouseDown(object sender, MouseButtonEventArgs e) {
             ScreenToClipboard.BorderBrush = System.Windows.Media.Brushes.Red;
+            setHotkeys = true;
             ScreenToClipboard.IsEnabled = false;
             ScreenToClipboard.Text = "Press keys combinations";
         }
 
         private void ScreenWithEdit_PreviewMouseDown(object sender, MouseButtonEventArgs e) {
             ScreenWithEdit.BorderBrush = System.Windows.Media.Brushes.Red;
+            setHotkeys = true;
             ScreenWithEdit.IsEnabled = false;
             ScreenWithEdit.Text = "Press keys combinations";
         }

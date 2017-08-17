@@ -99,7 +99,6 @@ namespace screengrab
                 Clipboard.SetImage(GetImage(croppedImage, Properties.Settings.Default.ImageFormat).Frames[0]);
                 tempcanvas.Children.Remove(croppedImage);
             } else {
-                
                 EditWindow editWindow = new EditWindow(croppedImage);
                 editWindow.Show();
             }
@@ -109,7 +108,6 @@ namespace screengrab
 
             // Get the size of canvas
             Size size = new Size(surface.Width, surface.Height);
-            Console.WriteLine(surface.Width + surface.Height);
 
             var scale = 1;//100/96d;
             surface.Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
