@@ -7,7 +7,6 @@ using System.Collections;
 using screengrab.Classes;
 using System.Windows.Forms;
 using System.IO;
-using Hardcodet.Wpf.TaskbarNotification;
 
 namespace screengrab
 {

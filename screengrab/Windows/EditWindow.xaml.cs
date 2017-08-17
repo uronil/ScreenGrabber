@@ -147,6 +147,10 @@ namespace screengrab.Windows
                     case PaintType.Pencil:
 
                         Line line = new Line();
+                        //bool shiftPressed = false;
+                        //if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift)) {
+                        //    shiftPressed = true;
+                        //}
 
                         line.Stroke = new SolidColorBrush(Colors.Red);
                         line.StrokeThickness = 3;
@@ -154,7 +158,7 @@ namespace screengrab.Windows
                         line.Y1 = currentPoint.Y;
                         line.X2 = e.GetPosition(this).X;
                         line.Y2 = e.GetPosition(this).Y;
-
+                        
                         currentPoint = e.GetPosition(this);
 
                         editCanvas.Children.Add(line);
