@@ -98,8 +98,6 @@ namespace screengrab
             if (instaScreen == 1) {
                 Clipboard.SetImage(GetImage(croppedImage, Properties.Settings.Default.ImageFormat).Frames[0]);
                 tempcanvas.Children.Remove(croppedImage);
-
-                this.Close();
             } else {
                 
                 EditWindow editWindow = new EditWindow(croppedImage);

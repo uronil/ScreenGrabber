@@ -160,6 +160,17 @@ namespace screengrab
         private void StartupCheckBox_Checked(object sender, RoutedEventArgs e) {
             Properties.Settings.Default.Startup = (bool)StartupCheckBox.IsChecked;
             Properties.Settings.Default.Save();
+
+            // Startup application setting, need windows registry
+            if (Properties.Settings.Default.Startup) {
+                Microsoft.Win32.RegistryKey Key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\\", true);
+                Key.SetValue("screengrab", AppDomain.CurrentDomain.BaseDirectory + "screengrab.exe");
+                Key.Close();
+            } else {
+                Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+                key.DeleteValue("screengrab", false);
+                key.Close();
+            }
         }
         
         private void ButtonImagePath_Click(object sender, RoutedEventArgs e) {
