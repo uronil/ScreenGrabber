@@ -18,8 +18,9 @@
         <Canvas x:Name="editCanvas"
                 MouseDown="editCanvas_MouseDown"
                 MouseMove="editCanvas_MouseMove"
-                MouseUp="editCanvas_MouseUp">
-            
+                MouseUp="editCanvas_MouseUp" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top">
         </Canvas>
         <StackPanel Grid.Column="1" Background="White">
             <Button x:Name="ButtonPaintPen"

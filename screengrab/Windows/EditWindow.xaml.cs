@@ -27,6 +27,7 @@ namespace screengrab.Windows
             editCanvas.Children.Add(this.image);
             ConfigurateWindowSize(this.image);
             paintType = PaintType.Pencil;
+
         }
 
         void ConfigurateWindowSize(Image image) {
@@ -123,7 +124,9 @@ namespace screengrab.Windows
                         line.X2 = e.GetPosition(this).X;
                         line.Y2 = e.GetPosition(this).Y;
                         
+                        // Straight line 
                         if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift)) {
+
                             if (!first) {
                                 firstPoint = e.GetPosition(this);
                                 first = true;
@@ -131,6 +134,7 @@ namespace screengrab.Windows
                                 
                             line.Y1 = firstPoint.Y;
                             line.Y2 = firstPoint.Y;
+
                         } else {
                             first = false;
                         }
