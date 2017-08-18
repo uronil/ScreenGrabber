@@ -28,11 +28,12 @@ namespace screengrab.Windows
             ConfigurateWindowSize(this.image);
             paintType = PaintType.Pencil;
             
+            
         }
 
         void ConfigurateWindowSize(Image image) {
             // Added pixels for windows border and fields
-            int addedHeight = 78, addedWidth = 56;
+            int addedHeight = 80, addedWidth = 58;
             if (image.Source.Height < 175) {
                 this.Height = 175 + addedHeight;
             } else if (image.Source.Height > 700) {
@@ -51,6 +52,7 @@ namespace screengrab.Windows
 
             editCanvas.Height = image.Source.Height;
             editCanvas.Width = image.Source.Width;
+            
         }
 
         private void CopyToClipboard_Click(object sender, RoutedEventArgs e) {
@@ -146,6 +148,7 @@ namespace screengrab.Windows
                         break;
 
                     case PaintType.Rect:
+
                         if (e.LeftButton == MouseButtonState.Released || rect == null)
                             return;
 

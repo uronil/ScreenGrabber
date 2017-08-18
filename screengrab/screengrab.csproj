@@ -172,5 +172,11 @@
   <ItemGroup>
     <None Include="Resourses\favicon.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resourses\pencil.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resourses\rectangle.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
