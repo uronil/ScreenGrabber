@@ -21,8 +21,8 @@ namespace screengrab.Windows
         Image image = new Image();
         PaintType paintType;
 
-        public EditWindow(Image image)
-        {
+        public EditWindow(Image image) { 
+
             InitializeComponent();
             this.image = image;
             editCanvas.Children.Add(this.image);
@@ -185,12 +185,14 @@ namespace screengrab.Windows
             paintType = PaintType.Pencil;
             ButtonPaintPen.Background = Brushes.White;
             ButtonPaintRect.Background = Brushes.LightGray;
+            editCanvas.Cursor = Cursors.Pen;
         }
 
         private void ButtonPaintRect_Click(object sender, RoutedEventArgs e) {
             paintType = PaintType.Rect;
             ButtonPaintPen.Background = Brushes.LightGray;
             ButtonPaintRect.Background = Brushes.White;
+            editCanvas.Cursor = Cursors.Cross;
         }
     }
 }

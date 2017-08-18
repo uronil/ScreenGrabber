@@ -21,7 +21,7 @@
             <Canvas x:Name="editCanvas"
                 MouseDown="editCanvas_MouseDown"
                 MouseMove="editCanvas_MouseMove"
-                MouseUp="editCanvas_MouseUp">
+                MouseUp="editCanvas_MouseUp" Cursor="Pen">
             </Canvas>
         </ScrollViewer>
         
