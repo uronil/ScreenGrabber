@@ -27,7 +27,7 @@ namespace screengrab.Windows
             editCanvas.Children.Add(this.image);
             ConfigurateWindowSize(this.image);
             paintType = PaintType.Pencil;
-
+            
         }
 
         void ConfigurateWindowSize(Image image) {
@@ -87,7 +87,7 @@ namespace screengrab.Windows
         
         private void editCanvas_MouseDown(object sender, MouseButtonEventArgs e) {
             if (e.ButtonState == MouseButtonState.Pressed) {
-                currentPoint = e.GetPosition(this);
+                currentPoint = e.GetPosition(editCanvas);
             }
             switch (paintType) {
                 case PaintType.Pencil:
@@ -95,7 +95,7 @@ namespace screengrab.Windows
                     break;
 
                 case PaintType.Rect:
-                    firstPoint = e.GetPosition(this);
+                    firstPoint = e.GetPosition(editCanvas);
 
                     rect = new Rectangle() {
                         StrokeThickness = 2,
@@ -121,14 +121,14 @@ namespace screengrab.Windows
                         line.StrokeThickness = 3;
                         line.X1 = currentPoint.X;
                         line.Y1 = currentPoint.Y;
-                        line.X2 = e.GetPosition(this).X;
-                        line.Y2 = e.GetPosition(this).Y;
+                        line.X2 = e.GetPosition(editCanvas).X;
+                        line.Y2 = e.GetPosition(editCanvas).Y;
                         
                         // Straight line 
                         if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift)) {
 
                             if (!first) {
-                                firstPoint = e.GetPosition(this);
+                                firstPoint = e.GetPosition(editCanvas);
                                 first = true;
                             }
                                 
@@ -139,7 +139,7 @@ namespace screengrab.Windows
                             first = false;
                         }
 
-                        currentPoint = e.GetPosition(this);
+                        currentPoint = e.GetPosition(editCanvas);
 
                         editCanvas.Children.Add(line);
 
@@ -149,7 +149,7 @@ namespace screengrab.Windows
                         if (e.LeftButton == MouseButtonState.Released || rect == null)
                             return;
 
-                        currentPoint = e.GetPosition(this);
+                        currentPoint = e.GetPosition(editCanvas);
 
                         var x = Math.Min(currentPoint.X, firstPoint.X);
                         var y = Math.Min(currentPoint.Y, firstPoint.Y);

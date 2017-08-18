@@ -138,9 +138,9 @@ namespace screengrab
                 h = Math.Max(currentPoint.Y, firstClick.Y) - y;
 
                 // Round
-                int round = 10;
-                w = Math.Round(w / round) * round;
-                h = Math.Round(h / round) * round;
+                //int round = 10;
+                //w = Math.Round(w / round) * round;
+                //h = Math.Round(h / round) * round;
 
                 _rect.Width = w;
                 _rect.Height = h;
