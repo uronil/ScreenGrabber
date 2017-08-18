@@ -20,6 +20,7 @@ namespace screengrab.Windows
     {
         Image image = new Image();
         PaintType paintType;
+
         public EditWindow(Image image)
         {
             InitializeComponent();
@@ -27,8 +28,10 @@ namespace screengrab.Windows
             editCanvas.Children.Add(this.image);
             ConfigurateWindowSize(this.image);
             paintType = PaintType.Pencil;
-            
-            
+
+            ButtonPaintPen.Background = Brushes.White;
+            ButtonPaintRect.Background = Brushes.LightGray;
+
         }
 
         void ConfigurateWindowSize(Image image) {
@@ -49,6 +52,9 @@ namespace screengrab.Windows
             } else {
                 this.Width = image.Source.Width + addedWidth;
             }
+
+            this.MinHeight = 175 + addedHeight;
+            this.MinWidth = 270 + addedWidth;
 
             editCanvas.Height = image.Source.Height;
             editCanvas.Width = image.Source.Width;
@@ -177,10 +183,14 @@ namespace screengrab.Windows
 
         private void ButtonPaintPen_Click(object sender, RoutedEventArgs e) {
             paintType = PaintType.Pencil;
+            ButtonPaintPen.Background = Brushes.White;
+            ButtonPaintRect.Background = Brushes.LightGray;
         }
 
         private void ButtonPaintRect_Click(object sender, RoutedEventArgs e) {
             paintType = PaintType.Rect;
+            ButtonPaintPen.Background = Brushes.LightGray;
+            ButtonPaintRect.Background = Brushes.White;
         }
     }
 }
