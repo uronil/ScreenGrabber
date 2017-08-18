@@ -137,9 +137,14 @@ namespace screengrab
                 w = Math.Max(currentPoint.X, firstClick.X) - x;
                 h = Math.Max(currentPoint.Y, firstClick.Y) - y;
 
+                // Round
+                int round = 10;
+                w = Math.Round(w / round) * round;
+                h = Math.Round(h / round) * round;
+
                 _rect.Width = w;
                 _rect.Height = h;
-
+                
                 if (w > 40 && h > 40) {
                     WidthTB.Text = w.ToString();
                     Canvas.SetTop(WidthPanel, y + 5);
@@ -152,7 +157,7 @@ namespace screengrab
                     WidthTB.Text = "";
                     HeightTB.Text = "";
                 }
-                
+
                 Canvas.SetLeft(_rect, x);
                 Canvas.SetTop(_rect, y);
             }
