@@ -22,6 +22,7 @@ namespace screengrab
         public MainWindow() {
             InitializeComponent();
             SetSettings();
+            Console.WriteLine(Properties.Settings.Default.LaunchCount);
         }
         
         public void SetSettings() {
@@ -65,6 +66,9 @@ namespace screengrab
             trayIcon.ContextMenu = trayMenu;
             trayIcon.Visible = true;
             trayIcon.MouseClick += TrayIcon_MouseClick;
+
+            // Remove  when realize
+            //Properties.Settings.Default.Save();
         }
 
         private void TrayIcon_MouseClick(object sender, System.Windows.Forms.MouseEventArgs e) {
