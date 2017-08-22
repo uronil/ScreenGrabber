@@ -50,7 +50,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>favicon.ico</ApplicationIcon>
+    <ApplicationIcon>Resourses\icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>AF9370B9799BADE4B15434AE3AF0B48DFC401ADD</ManifestCertificateThumbprint>
@@ -177,6 +177,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resourses\rectangle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resourses\icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resourses\icon_v2.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

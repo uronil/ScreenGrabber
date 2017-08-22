@@ -60,7 +60,7 @@ namespace screengrab
             // Create a tray icon
             trayIcon = new NotifyIcon();
             trayIcon.Text = "ScreenGrab";
-            trayIcon.Icon = Properties.Resources.favicon;
+            trayIcon.Icon = Properties.Resources.icon;
 
             // Add menu to tray icon and show it
             trayIcon.ContextMenu = trayMenu;
