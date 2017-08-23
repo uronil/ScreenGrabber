@@ -81,6 +81,7 @@ namespace screengrab
             if (e.Button == MouseButtons.Right) {
                 this.Show();
                 WindowState = WindowState.Normal;
+                this.Activate();
             }   
         }
 
