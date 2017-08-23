@@ -30,7 +30,7 @@ namespace screengrab
             if (Properties.Settings.Default.LaunchCount == 0) {
                 Properties.Settings.Default.Hotkey = new Hotkey("screen", new List<Key> { Key.X, Key.LeftCtrl, Key.LeftShift });
                 Properties.Settings.Default.HotkeyWithEdit = new Hotkey("screenFast", new List<Key> { Key.C, Key.LeftCtrl, Key.LeftShift });
-                Properties.Settings.Default.LoadImagePath = System.AppDomain.CurrentDomain.BaseDirectory;
+                Properties.Settings.Default.LoadImagePath = AppDomain.CurrentDomain.BaseDirectory;
             }
 
             // Crutch (ебаный костыль - russian jargon)
@@ -69,6 +69,10 @@ namespace screengrab
 
             // Remove  when realize
             //Properties.Settings.Default.Save();
+
+            // Set window position
+            this.Left = SystemParameters.PrimaryScreenWidth - this.Width - 50;
+            this.Top = SystemParameters.PrimaryScreenHeight - this.Height - 90;
         }
 
         private void TrayIcon_MouseClick(object sender, System.Windows.Forms.MouseEventArgs e) {
@@ -191,7 +195,5 @@ namespace screengrab
                 Properties.Settings.Default.LoadImagePath = path;
             }
         }
-
-       
     }
 }
