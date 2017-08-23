@@ -105,7 +105,10 @@ namespace screengrab
 
             if (Properties.Settings.Default.LoadToDisk) {
                 ImageConverter.SaveImageTo(Properties.Settings.Default.ImageFormat,
-                                       Properties.Settings.Default.LoadImagePath + "image" + ImageConverter.ImageFormat(Properties.Settings.Default.ImageFormat),
+                                       Properties.Settings.Default.LoadImagePath + 
+                                            "Image-" + 
+                                            DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss-tt") +
+                                            ImageConverter.ImageFormat(Properties.Settings.Default.ImageFormat),
                                        croppedImage);
             }
         }
