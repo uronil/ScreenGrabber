@@ -138,18 +138,12 @@ namespace screengrab
 
         bool setHotkeys = false;
 
-        private void ScreenToClipboard_MouseDown(object sender, MouseButtonEventArgs e) {
-            ScreenToClipboard.BorderBrush = System.Windows.Media.Brushes.Red;
+        private void ScreenToTextBox_PreviewMouseDown(object sender, MouseButtonEventArgs e) {
+            System.Windows.Controls.TextBox tb = sender as System.Windows.Controls.TextBox;
+            tb.BorderBrush = System.Windows.Media.Brushes.Red;
             setHotkeys = true;
-            ScreenToClipboard.IsEnabled = false;
-            ScreenToClipboard.Text = "Press keys combinations";
-        }
-
-        private void ScreenWithEdit_PreviewMouseDown(object sender, MouseButtonEventArgs e) {
-            ScreenWithEdit.BorderBrush = System.Windows.Media.Brushes.Red;
-            setHotkeys = true;
-            ScreenWithEdit.IsEnabled = false;
-            ScreenWithEdit.Text = "Press keys combinations";
+            tb.IsEnabled = false;
+            tb.Text = "Press keys combinations";
         }
 
         // Open CaptureWindow method
@@ -197,5 +191,7 @@ namespace screengrab
                 Properties.Settings.Default.LoadImagePath = path;
             }
         }
+
+       
     }
 }

@@ -15,10 +15,10 @@
 
             <GroupBox Header="Shortcuts" Height="98" Canvas.Top="31" Width="296"/>
 
-            <TextBox PreviewMouseDown="ScreenToClipboard_MouseDown"  x:Name="ScreenToClipboard" Text="CTRL+SHIFT+X" Canvas.Top="55" Width="169" Height="26" VerticalContentAlignment="Center" Canvas.Left="10" Cursor="Hand"/>
+            <TextBox PreviewMouseDown="ScreenToTextBox_PreviewMouseDown"  x:Name="ScreenToClipboard" Text="CTRL+SHIFT+X" Canvas.Top="55" Width="169" Height="26" VerticalContentAlignment="Center" Canvas.Left="10" Cursor="Hand"/>
             <Label Content="Screen to clipboard" Canvas.Left="184" Canvas.Top="55" Width="112" Padding="0,5,5,5"></Label>
 
-            <TextBox PreviewMouseDown="ScreenWithEdit_PreviewMouseDown" x:Name="ScreenWithEdit" Text="CTRL+SHIFT+C" Canvas.Top="86" Width="169" Height="26" VerticalContentAlignment="Center" Canvas.Left="10" Cursor="Hand"></TextBox>
+            <TextBox PreviewMouseDown="ScreenToTextBox_PreviewMouseDown" x:Name="ScreenWithEdit" Text="CTRL+SHIFT+C" Canvas.Top="86" Width="169" Height="26" VerticalContentAlignment="Center" Canvas.Left="10" Cursor="Hand"></TextBox>
             <Label Content="Screen with edit" Canvas.Left="184" Canvas.Top="86" Width="112" Padding="0,5,5,5"></Label>
 
             <GroupBox Header="Images" Height="123" Canvas.Top="134" Width="296"/>
