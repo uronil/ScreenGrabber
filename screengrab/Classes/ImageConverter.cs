@@ -18,6 +18,28 @@ namespace screengrab.Classes {
             }
         }
 
+        static public string ImageFormat(int imageformat) {
+            switch (imageformat) {
+                case 1: // PNG
+                    return ".png";
+                    break;
+                case 2: // JPG
+                    return ".jpg";
+                    break;
+                case 3: // BMP
+                    return ".bmp";
+                    break;
+            }
+            return "";
+        }
+
+        static public void SaveImageTo(int imageFormat, string fileName, Image image) {
+            BitmapEncoder enc = GetImage(image, imageFormat);
+            using (var stm = System.IO.File.Create(fileName)) {
+                enc.Save(stm); // Saving image
+            }
+        }
+
         static public void CopyToClipboard(Canvas canvas, int imageFormat) {
             Clipboard.SetImage(GetImage(canvas, imageFormat).Frames[0]);
         }

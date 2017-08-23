@@ -102,6 +102,12 @@ namespace screengrab
                 EditWindow editWindow = new EditWindow(croppedImage);
                 editWindow.Show();
             }
+
+            if (Properties.Settings.Default.LoadToDisk) {
+                ImageConverter.SaveImageTo(Properties.Settings.Default.ImageFormat,
+                                       Properties.Settings.Default.LoadImagePath + "image" + ImageConverter.ImageFormat(Properties.Settings.Default.ImageFormat),
+                                       croppedImage);
+            }
         }
 
         private void MouseDown(object sender, MouseButtonEventArgs e) {
