@@ -45,7 +45,7 @@ namespace screengrab
 
             LoadImagesToDiskCheckBox.IsChecked = Properties.Settings.Default.LoadToDisk;
             LoadImagePathTextBox.Text = Properties.Settings.Default.LoadImagePath;
-            ImageFormatComboBox.SelectedIndex = Properties.Settings.Default.ImageFormat;
+            ImageFormatComboBox.SelectedIndex = Properties.Settings.Default.ImageFormat - 1;
             StartupCheckBox.IsChecked = Properties.Settings.Default.Startup;
 
             // Keyboard initialization
