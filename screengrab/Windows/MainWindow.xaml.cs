@@ -160,6 +160,9 @@ namespace screengrab
 
         private void LoadImagesToDiskCheckBox_Checked(object sender, RoutedEventArgs e) {
             Properties.Settings.Default.LoadToDisk = (bool)LoadImagesToDiskCheckBox.IsChecked;
+            LoadImagePathTextBox.IsEnabled = (bool)LoadImagesToDiskCheckBox.IsChecked;
+            ButtonImagePath.IsEnabled = (bool)LoadImagesToDiskCheckBox.IsChecked;
+            ImageFormatComboBox.IsEnabled = (bool)LoadImagesToDiskCheckBox.IsChecked;
             Properties.Settings.Default.Save();
         }
 
