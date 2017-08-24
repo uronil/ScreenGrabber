@@ -110,6 +110,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Classes\ImageConverter.cs" />
+    <Compile Include="Classes\Tray.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Windows\CaptureWindow.xaml.cs">
       <DependentUpon>CaptureWindow.xaml</DependentUpon>

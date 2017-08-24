@@ -3,6 +3,7 @@ using screengrab.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -85,6 +86,7 @@ namespace screengrab
         private void MouseUp(object sender, MouseButtonEventArgs e) {
             if (_rect.Height < 20 || _rect.Width < 20) {
                 CloseWindow();
+                Tray.ShotNotification("Screenshot cannot loaded, very small");
                 return;
             }
             first = false;
@@ -107,6 +109,8 @@ namespace screengrab
                 editWindow.Show();
             }
 
+            string loadtodisk = "";
+
             if (Properties.Settings.Default.LoadToDisk) {
                 ImageConverter.SaveImageTo(Properties.Settings.Default.ImageFormat,
                                        Properties.Settings.Default.LoadImagePath + 
@@ -114,7 +118,10 @@ namespace screengrab
                                             DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss-tt") +
                                             ImageConverter.ImageFormat(Properties.Settings.Default.ImageFormat),
                                        croppedImage);
+                loadtodisk = " and saved to disk";
             }
+
+            Tray.ShotNotification("Screenshot loaded" + loadtodisk);
         }
 
         private void MouseDown(object sender, MouseButtonEventArgs e) {

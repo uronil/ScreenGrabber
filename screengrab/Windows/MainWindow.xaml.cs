@@ -16,7 +16,7 @@ namespace screengrab
         List<Key> pressedKeys;
         KeyboardListener KListener = new KeyboardListener();
 
-        private NotifyIcon trayIcon;
+        
         private ContextMenu trayMenu;
 
         public MainWindow() {
@@ -47,6 +47,7 @@ namespace screengrab
             LoadImagePathTextBox.Text = Properties.Settings.Default.LoadImagePath;
             ImageFormatComboBox.SelectedIndex = Properties.Settings.Default.ImageFormat - 1;
             StartupCheckBox.IsChecked = Properties.Settings.Default.Startup;
+            NotificationCheckBox.IsChecked = Properties.Settings.Default.Notifications;
 
             // Keyboard initialization
             pressedKeys = new List<Key>();
@@ -58,21 +59,23 @@ namespace screengrab
             this.Hide();
             
             // Create a tray icon
-            trayIcon = new NotifyIcon();
-            trayIcon.Text = "ScreenGrab";
-            trayIcon.Icon = Properties.Resources.icon;
+            Tray.trayIcon = new NotifyIcon();
+            Tray.trayIcon.Text = "ScreenGrab";
+            Tray.trayIcon.Icon = Properties.Resources.icon;
 
             // Add menu to tray icon and show it
-            trayIcon.ContextMenu = trayMenu;
-            trayIcon.Visible = true;
-            trayIcon.MouseClick += TrayIcon_MouseClick;
-
+            Tray.trayIcon.ContextMenu = trayMenu;
+            Tray.trayIcon.Visible = true;
+            Tray.trayIcon.MouseClick += TrayIcon_MouseClick;
+            
             // Remove  when realize
             //Properties.Settings.Default.Save();
 
             // Set window position
             this.Left = SystemParameters.PrimaryScreenWidth - this.Width - 50;
             this.Top = SystemParameters.PrimaryScreenHeight - this.Height - 90;
+
+            
         }
 
         private void TrayIcon_MouseClick(object sender, System.Windows.Forms.MouseEventArgs e) {
@@ -198,6 +201,11 @@ namespace screengrab
                 LoadImagePathTextBox.Text = path;
                 Properties.Settings.Default.LoadImagePath = path;
             }
+        }
+
+        private void NotificationCheckBox_Click(object sender, RoutedEventArgs e) {
+            Properties.Settings.Default.Notifications = (bool)NotificationCheckBox.IsChecked;
+            Properties.Settings.Default.Save();
         }
     }
 }
