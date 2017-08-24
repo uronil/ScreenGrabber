@@ -42,8 +42,8 @@
             <CheckBox Click="StartupCheckBox_Checked" x:Name="StartupCheckBox" RenderTransformOrigin="0.836,0.904" Canvas.Left="10" Canvas.Top="282" Height="26" VerticalContentAlignment="Center" Width="109" Padding="0">
                 <Label Content="Startup" Canvas.Left="26" Canvas.Top="152" Width="99" Padding="5"></Label>
             </CheckBox>
-            <CheckBox Click="NotificationCheckBox_Click" x:Name="NotificationCheckBox" RenderTransformOrigin="0.836,0.904" Canvas.Left="10" Canvas.Top="308" Height="26" VerticalContentAlignment="Center" Width="109" Padding="0">
-                <Label Content="Notifications" Canvas.Left="26" Canvas.Top="152" Width="99" Padding="5"></Label>
+            <CheckBox Click="NotificationCheckBox_Click" x:Name="NotificationCheckBox" RenderTransformOrigin="0.836,0.904" Canvas.Left="10" Canvas.Top="308" Height="26" VerticalContentAlignment="Center" Width="138" Padding="0">
+                <Label Content="Show notifications" Canvas.Left="26" Canvas.Top="152" Width="128" Padding="5"></Label>
             </CheckBox>
             <Label x:Name="link_website" Content="Link to website" Canvas.Left="10" Canvas.Top="334" Width="99" Padding="1,5,5,5" Cursor="Hand" Background="White" Foreground="#FF0074FF"></Label>
             <Label x:Name="link_profile" Content="Link to your profile" Canvas.Left="10" Canvas.Top="360" Width="274" Padding="1,5,5,5" Cursor="Hand" Background="White" Foreground="#FF0074FF"/>
