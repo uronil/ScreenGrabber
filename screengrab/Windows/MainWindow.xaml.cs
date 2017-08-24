@@ -31,6 +31,7 @@ namespace screengrab
                 Properties.Settings.Default.Hotkey = new Hotkey("screen", new List<Key> { Key.X, Key.LeftCtrl, Key.LeftShift });
                 Properties.Settings.Default.HotkeyWithEdit = new Hotkey("screenFast", new List<Key> { Key.C, Key.LeftCtrl, Key.LeftShift });
                 Properties.Settings.Default.LoadImagePath = AppDomain.CurrentDomain.BaseDirectory;
+                Properties.Settings.Default.ImageFormat = 1;
             }
 
             // Crutch (ебаный костыль - russian jargon)
@@ -60,7 +61,7 @@ namespace screengrab
             
             // Create a tray icon
             Tray.trayIcon = new NotifyIcon();
-            Tray.trayIcon.Text = "ScreenGrab";
+            Tray.trayIcon.Text = "Screen Grabber";
             Tray.trayIcon.Icon = Properties.Resources.icon;
 
             // Add menu to tray icon and show it
