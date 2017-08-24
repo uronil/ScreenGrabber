@@ -74,8 +74,6 @@ namespace screengrab
             // Set window position
             this.Left = SystemParameters.PrimaryScreenWidth - this.Width - 50;
             this.Top = SystemParameters.PrimaryScreenHeight - this.Height - 90;
-
-            
         }
 
         private void TrayIcon_MouseClick(object sender, System.Windows.Forms.MouseEventArgs e) {
