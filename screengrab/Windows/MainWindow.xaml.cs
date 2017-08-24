@@ -28,9 +28,9 @@ namespace screengrab
         public void SetSettings() {
             // First launch, set default settings
             if (Properties.Settings.Default.LaunchCount == 0) {
-                Properties.Settings.Default.Hotkey = new Hotkey("screen", new List<Key> { Key.X, Key.LeftCtrl, Key.LeftShift });
-                Properties.Settings.Default.HotkeyWithEdit = new Hotkey("screenFast", new List<Key> { Key.C, Key.LeftCtrl, Key.LeftShift });
-                Properties.Settings.Default.LoadImagePath = AppDomain.CurrentDomain.BaseDirectory;
+                Properties.Settings.Default.Hotkey = new Hotkey("ScreenHotkey", new List<Key> { Key.X, Key.LeftCtrl, Key.LeftShift });
+                Properties.Settings.Default.HotkeyWithEdit = new Hotkey("ScreenHotkeyWithEdit", new List<Key> { Key.C, Key.LeftCtrl, Key.LeftShift });
+                Properties.Settings.Default.LoadImagePath = AppDomain.CurrentDomain.BaseDirectory + "Images\\";
                 Properties.Settings.Default.ImageFormat = 1;
             }
 
