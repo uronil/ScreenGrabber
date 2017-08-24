@@ -83,6 +83,10 @@ namespace screengrab
         double x, y, w, h;
 
         private void MouseUp(object sender, MouseButtonEventArgs e) {
+            if (_rect.Height < 20 || _rect.Width < 20) {
+                CloseWindow();
+                return;
+            }
             first = false;
 
             canvas.Children.Remove(_rect);
