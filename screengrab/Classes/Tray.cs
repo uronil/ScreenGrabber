@@ -13,7 +13,7 @@ namespace screengrab.Classes {
             if (Properties.Settings.Default.Notifications) {
                 trayIcon.BalloonTipTitle = projectName;
                 trayIcon.BalloonTipText = str;
-                trayIcon.ShowBalloonTip(3000);
+                trayIcon.ShowBalloonTip(1500);
             }
         }
     }
