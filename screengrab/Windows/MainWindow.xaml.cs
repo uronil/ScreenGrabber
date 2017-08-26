@@ -17,7 +17,7 @@ namespace screengrab
         KeyboardListener KListener = new KeyboardListener();
 
         
-        private ContextMenu trayMenu;
+        //private ContextMenu trayMenu;
 
         public MainWindow() {
             InitializeComponent();
@@ -65,7 +65,7 @@ namespace screengrab
             Tray.trayIcon.Icon = Properties.Resources.icon;
 
             // Add menu to tray icon and show it
-            Tray.trayIcon.ContextMenu = trayMenu;
+            //Tray.trayIcon.ContextMenu = trayMenu;
             Tray.trayIcon.Visible = true;
             Tray.trayIcon.MouseClick += TrayIcon_MouseClick;
             

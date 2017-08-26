@@ -22,13 +22,10 @@ namespace screengrab.Classes {
             switch (imageformat) {
                 case 1: // PNG
                     return ".png";
-                    break;
                 case 2: // JPG
                     return ".jpg";
-                    break;
                 case 3: // BMP
                     return ".bmp";
-                    break;
             }
             return "";
         }
