@@ -22,7 +22,8 @@ namespace screengrab
         public MainWindow() {
             InitializeComponent();
             SetSettings();
-            Console.WriteLine(Properties.Settings.Default.LaunchCount);
+            
+
         }
         
         public void SetSettings() {
@@ -118,6 +119,7 @@ namespace screengrab
             if (!ScreenWithEdit.IsEnabled) {
                 ScreenWithEdit.Text = string.Join<Key>(" + ", pressedKeys);
             }
+            
         }
 
         void KListener_KeyUp(object sender, RawKeyEventArgs e) {
@@ -155,10 +157,8 @@ namespace screengrab
         }
 
         // Open CaptureWindow method
-        CaptureWindow captureWindow;
         public void OpenCaptureWindow(int settings) {
-            
-            captureWindow = new CaptureWindow(settings);
+            CaptureWindow captureWindow = new CaptureWindow(settings);
             Properties.Settings.Default.CaptureWindowOpened = true;
             captureWindow.Show();
         }
@@ -182,14 +182,20 @@ namespace screengrab
 
             // Startup application setting, need windows registry
             if (Properties.Settings.Default.Startup) {
-                Microsoft.Win32.RegistryKey Key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\\", true);
-                Key.SetValue("screengrab", AppDomain.CurrentDomain.BaseDirectory + "screengrab.exe");
-                Key.Close();
+                SetAutoload(true);
             } else {
-                Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
-                key.DeleteValue("screengrab", false);
-                key.Close();
+                SetAutoload(false);
             }
+        }
+
+        public void SetAutoload(bool set) {
+            Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\\", true);
+            if (set) {
+                key.SetValue("ScreenGrabber", "\"" + AppDomain.CurrentDomain.BaseDirectory + "ScreenGrabber.exe" + "\"");
+            } else {
+                key.DeleteValue("ScreenGrabber", false);
+            }
+            key.Close();
         }
         
         private void ButtonImagePath_Click(object sender, RoutedEventArgs e) {

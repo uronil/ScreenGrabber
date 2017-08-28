@@ -93,6 +93,7 @@ namespace screengrab
 
             canvas.Children.Remove(_rect);
             canvas.Children.Remove(img);
+            canvas.Children.Clear();
             CloseWindow();
 
             CroppedBitmap cb = new CroppedBitmap(
