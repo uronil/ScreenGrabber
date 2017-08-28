@@ -28,7 +28,7 @@
             </CheckBox>
 
             <TextBox x:Name="LoadImagePathTextBox" Text="C:\Program Files\Unity\Editor\Data\il2cpp" Canvas.Top="183" Width="218" Height="26" VerticalContentAlignment="Center" Canvas.Left="10"></TextBox>
-            <Button Click="ButtonImagePath_Click" x:Name="ButtonImagePath"  Content="More..." Canvas.Left="233" Width="51" Height="26" Canvas.Top="183"></Button>
+            <Button Click="ButtonImagePath_Click" x:Name="ButtonImagePath"  Content="Open..." Canvas.Left="233" Width="51" Height="26" Canvas.Top="183"></Button>
 
             <Label Content="Image format" Canvas.Top="214" Width="81" Canvas.Left="10" Padding="0,5,5,5"/>
             <ComboBox LostFocus="ImageFormatComboBox_LostFocus" x:Name="ImageFormatComboBox" Canvas.Left="194" Canvas.Top="214" Width="90" Height="26" SelectedIndex="0" VerticalContentAlignment="Center" >

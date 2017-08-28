@@ -17,10 +17,7 @@ namespace screengrab
         // Variables for keyboard
         List<Key> pressedKeys;
         KeyboardListener KListener = new KeyboardListener();
-
         
-        //private ContextMenu trayMenu;
-
         public MainWindow() {
             InitializeComponent();
             SetSettings();
@@ -180,7 +177,7 @@ namespace screengrab
             Properties.Settings.Default.Startup = (bool)StartupCheckBox.IsChecked;
             Properties.Settings.Default.Save();
 
-            // Startup application setting, need windows registry
+            // Startup application setting
             if (Properties.Settings.Default.Startup) {
                 SetAutoload(true);
             } else {
