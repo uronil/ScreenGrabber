@@ -95,6 +95,7 @@ namespace screengrab
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) {
             Properties.Settings.Default.Save();
+            Tray.trayIcon.Dispose();
             System.Windows.Application.Current.Shutdown();
         }
         
@@ -156,6 +157,7 @@ namespace screengrab
         // Open CaptureWindow method
         CaptureWindow captureWindow;
         public void OpenCaptureWindow(int settings) {
+            
             captureWindow = new CaptureWindow(settings);
             Properties.Settings.Default.CaptureWindowOpened = true;
             captureWindow.Show();
