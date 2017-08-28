@@ -7,6 +7,8 @@ using System.Collections;
 using screengrab.Classes;
 using System.Windows.Forms;
 using System.IO;
+using System.Runtime.InteropServices;
+using Microsoft.Win32;
 
 namespace screengrab
 {
@@ -22,8 +24,6 @@ namespace screengrab
         public MainWindow() {
             InitializeComponent();
             SetSettings();
-            
-
         }
         
         public void SetSettings() {
@@ -189,7 +189,7 @@ namespace screengrab
         }
 
         public void SetAutoload(bool set) {
-            Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\\", true);
+            RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\\", true);
             if (set) {
                 key.SetValue("ScreenGrabber", "\"" + AppDomain.CurrentDomain.BaseDirectory + "ScreenGrabber.exe" + "\"");
             } else {
