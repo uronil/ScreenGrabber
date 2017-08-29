@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:screengrab.Windows"
         mc:Ignorable="d"
-        Title="Edit" Height="397.891" Width="679.833">
+        Title="Edit" Height="361.891" Width="502.833">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -24,7 +24,7 @@
                 MouseUp="editCanvas_MouseUp" Cursor="Pen">
             </Canvas>
         </ScrollViewer>
-        
+
         <Border
             BorderThickness="1"
             BorderBrush="Black">

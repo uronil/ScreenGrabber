@@ -6,8 +6,6 @@ using System.Linq;
 using System.Collections;
 using screengrab.Classes;
 using System.Windows.Forms;
-using System.IO;
-using System.Runtime.InteropServices;
 using Microsoft.Win32;
 
 namespace screengrab

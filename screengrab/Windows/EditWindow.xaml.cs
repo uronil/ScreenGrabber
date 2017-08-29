@@ -7,31 +7,25 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 namespace screengrab.Windows
 {
     public partial class EditWindow : Window
     {
-        Image image = new Image();
         PaintType paintType;
 
         public EditWindow(Image image) { 
-
             InitializeComponent();
-            this.image = image;
-            editCanvas.Children.Add(this.image);
-            ConfigurateWindowSize(this.image);
-            paintType = PaintType.Pencil;
 
+            editCanvas.Children.Add(image);
+
+            ConfigurateWindowSize(image);
+            paintType = PaintType.Pencil;
             ButtonPaintPen.Background = Brushes.White;
             ButtonPaintRect.Background = Brushes.LightGray;
-
         }
 
         void ConfigurateWindowSize(Image image) {
@@ -58,7 +52,6 @@ namespace screengrab.Windows
 
             editCanvas.Height = image.Source.Height;
             editCanvas.Width = image.Source.Width;
-            
         }
 
         private void CopyToClipboard_Click(object sender, RoutedEventArgs e) {
@@ -87,8 +80,7 @@ namespace screengrab.Windows
         Point firstPoint = new Point();
         Rectangle rect;
 
-        public enum PaintType
-        {
+        public enum PaintType {
             Pencil,
             Rect
         }
@@ -132,7 +124,7 @@ namespace screengrab.Windows
                         line.X2 = e.GetPosition(editCanvas).X;
                         line.Y2 = e.GetPosition(editCanvas).Y;
                         
-                        // Straight line 
+                        // Straight line (HOLD SHIFT)
                         if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift)) {
 
                             if (!first) {
