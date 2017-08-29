@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -16,10 +17,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace screengrab
-{
-    public partial class CaptureWindow : Window
-    {
+namespace screengrab {
+    public partial class CaptureWindow : Window {
         // Screen characteristics
         double screenWidth, screenHeight, screenLeft, screenTop;
 
@@ -54,25 +53,34 @@ namespace screengrab
 
             this.Top = 0;
             this.Left = 0;
-            
+
             img.Source = CopyScreen();
             canvas.Children.Add(img);
         }
+
+        [DllImport("gdi32.dll")]
+        private static extern bool DeleteObject(IntPtr hObject);
 
         private BitmapSource CopyScreen() {
             var left = (int)screenLeft;
             var top = (int)screenTop;
             var width = (int)screenWidth;
             var height = (int)screenHeight;
-
+            
             using (var screenBmp = new System.Drawing.Bitmap(width, height, System.Drawing.Imaging.PixelFormat.Format32bppArgb)) {
                 using (var bmpGraphics = System.Drawing.Graphics.FromImage(screenBmp)) {
                     bmpGraphics.CopyFromScreen(left, top, 0, 0, new System.Drawing.Size(width, height));
-                    return Imaging.CreateBitmapSourceFromHBitmap(
-                        screenBmp.GetHbitmap(),
+                    IntPtr hBitmap = screenBmp.GetHbitmap();
+                    try {
+                        return Imaging.CreateBitmapSourceFromHBitmap(
+                        hBitmap,
                         IntPtr.Zero,
                         Int32Rect.Empty,
                         BitmapSizeOptions.FromEmptyOptions());
+                    }
+                    finally {
+                        DeleteObject(hBitmap);
+                    }
                 }
             }
         }
@@ -84,6 +92,10 @@ namespace screengrab
         double x, y, w, h;
 
         private void MouseUp(object sender, MouseButtonEventArgs e) {
+            canvas.Children.Remove(_rect);
+            canvas.Children.Remove(img);
+            canvas.Children.Clear();
+
             if (_rect.Height < 20 || _rect.Width < 20) {
                 CloseWindow();
                 Tray.ShotNotification("Screenshot cannot loaded, very small");
@@ -91,15 +103,12 @@ namespace screengrab
             }
             first = false;
 
-            canvas.Children.Remove(_rect);
-            canvas.Children.Remove(img);
-            canvas.Children.Clear();
             CloseWindow();
 
             CroppedBitmap cb = new CroppedBitmap(
-                (BitmapSource)img.Source, 
+                (BitmapSource)img.Source,
                 new Int32Rect((int)x, (int)y, (int)w, (int)h));
-            
+
             Image croppedImage = new Image();
             croppedImage.Source = cb;
 
@@ -114,9 +123,9 @@ namespace screengrab
 
             if (Properties.Settings.Default.LoadToDisk) {
                 ImageConverter.SaveImageTo(Properties.Settings.Default.ImageFormat,
-                                       Properties.Settings.Default.LoadImagePath + 
-                                            "Image-" + 
-                                            DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss-tt") +
+                                       Properties.Settings.Default.LoadImagePath +
+                                            "Image-" +
+                                            DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") +
                                             ImageConverter.ImageFormat(Properties.Settings.Default.ImageFormat),
                                        croppedImage);
                 loadtodisk = " and saved to disk";
@@ -143,7 +152,7 @@ namespace screengrab
                 canvas.Children.Add(_rect);
             }
         }
-        
+
         private void MouseMove(object sender, MouseEventArgs e) {
             if (e.LeftButton == MouseButtonState.Pressed) {
                 currentPoint = e.GetPosition(this);
@@ -165,7 +174,7 @@ namespace screengrab
 
                 _rect.Width = w;
                 _rect.Height = h;
-                
+
                 if (w > 40 && h > 40) {
                     WidthTB.Text = w.ToString();
                     Canvas.SetTop(WidthPanel, y + 5);
