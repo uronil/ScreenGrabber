@@ -22,6 +22,9 @@ namespace screengrab
         public MainWindow() {
             InitializeComponent();
             SetSettings();
+
+            // Not working
+            //AsynchronousClient.StartClient();
         }
 
         public void SetSettings() {
