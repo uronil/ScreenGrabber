@@ -7,6 +7,9 @@ using System.Collections;
 using screengrab.Classes;
 using System.Windows.Forms;
 using Microsoft.Win32;
+using System.Net.Sockets;
+using System.Text;
+using System.IO;
 
 namespace screengrab
 {
@@ -20,7 +23,7 @@ namespace screengrab
             InitializeComponent();
             SetSettings();
         }
-        
+
         public void SetSettings() {
             // First launch, set default settings
             if (Properties.Settings.Default.LaunchCount == 0) {
