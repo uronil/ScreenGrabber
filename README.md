@@ -1,5 +1,10 @@
 # ScreenGrabber
 
+[![Build status](https://img.shields.io/appveyor/ci/qvepoy/ScreenGrabber.svg?label=Build&maxAge=60)](https://ci.appveyor.com/project/qvepoy/ScreenGrabber)
+[![License](https://img.shields.io/github/license/qvepoy/ScreenGrabber.svg?label=License&maxAge=86400)](./LICENSE.txt)
+[![Release](https://img.shields.io/github/release/qvepoy/ScreenGrabber.svg?label=Release&maxAge=60)](https://github.com/ShareX/ShareX/releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/qvepoy/ScreenGrabber/latest/total.svg?label=Downloads&maxAge=60)](https://getsharex.com/downloads/)
+
 ScreenGrabber is a free and open source program that lets you capture any area of your screen, edit with pencil and share it with a single press of a key. 
 
 Main Window:
