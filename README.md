@@ -7,10 +7,24 @@
 
 ScreenGrabber is a free and open source program that lets you capture any area of your screen, edit with pencil and share it with a single press of a key. 
 
+# Features: 
+
+- Capture any area
+- Set hotkeys
+- Draw on picture
+- Copy image to buffer
+- Set startup
+
+# Screenshots:
+
 Main Window:
 
-![image](https://user-images.githubusercontent.com/23909416/29910538-f84168ea-8e32-11e7-9176-1ba2fd2b734d.png)
+![2017-09-04_10-20-17](https://user-images.githubusercontent.com/23909416/30016038-0d496c20-915c-11e7-9f8f-f3372a3f8b12.gif)
+
+Capture:
+
+![2017-09-04_10-21-29](https://user-images.githubusercontent.com/23909416/30016052-217c1666-915c-11e7-870b-98b0b08f5d9f.gif)
 
 Editing:
 
-![2017-08-31_10-05-10](https://user-images.githubusercontent.com/23909416/29910812-0e85f3c2-8e34-11e7-8739-c1f0cdffded4.gif)
+![2017-09-04_10-22-07](https://user-images.githubusercontent.com/23909416/30016041-12e5022a-915c-11e7-968a-22b84175ed7e.gif)
