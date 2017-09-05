@@ -15,7 +15,7 @@ ScreenGrabber is a free and open source program that lets you capture any area o
 - Copy image to buffer
 - Set startup
 
-# Review from Softpedia (31.08.17):
+# Review from [Softpedia][softpedia]:
 
 - Capture any area of your screen with a simple hotkey, make basic annotations and copy the image to the clipboard or save it, with this lightweight utility
 
@@ -56,3 +56,5 @@ Capture:
 Editing:
 
 ![2017-09-04_10-22-07](https://user-images.githubusercontent.com/23909416/30016041-12e5022a-915c-11e7-968a-22b84175ed7e.gif)
+
+   [softpedia]: <http://www.softpedia.com/get/Multimedia/Graphic/Graphic-Capture/qvepoy-Screen-Grabber.shtml>
