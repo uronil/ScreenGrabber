@@ -4,6 +4,7 @@
 [![License](https://img.shields.io/github/license/qvepoy/ScreenGrabber.svg?label=License&maxAge=86400)](./LICENSE.txt)
 [![Release](https://img.shields.io/github/release/qvepoy/ScreenGrabber.svg?label=Release&maxAge=60)](https://github.com/qvepoy/ScreenGrabber/releases/latest)
 [![Downloads](https://img.shields.io/github/downloads/qvepoy/ScreenGrabber/latest/total.svg?label=Downloads&maxAge=60)](https://github.com/qvepoy/ScreenGrabber/releases/latest)
+[![Discord](https://discordapp.com/api/guilds/356095189317582848/widget.png)](https://discord.gg/NzJnYGF)
 
 ScreenGrabber is a free and open source program that lets you capture any area of your screen, edit with pencil and share it with a single press of a key. 
 
