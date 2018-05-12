@@ -22,9 +22,6 @@ namespace screengrab
         public MainWindow() {
             InitializeComponent();
             SetSettings();
-
-            // Not working
-            //AsynchronousClient.StartClient();
         }
 
         public void SetSettings() {
@@ -36,7 +33,7 @@ namespace screengrab
                 Properties.Settings.Default.ImageFormat = 1;
             }
 
-            // Crutch (ебаный костыль - russian jargon)
+            // Crutch (костыль)
             Properties.Settings.Default.CaptureWindowOpened = false;
 
             // Statistic
@@ -59,39 +56,36 @@ namespace screengrab
 
             // Launch application minimized
             WindowState = WindowState.Minimized;
-            this.Hide();
+            Hide();
             
             // Create a tray icon
             Tray.trayIcon = new NotifyIcon();
             Tray.trayIcon.Text = "Screen Grabber";
             Tray.trayIcon.Icon = Properties.Resources.icon;
 
-            // Add menu to tray icon and show it
-            //Tray.trayIcon.ContextMenu = trayMenu;
+            // Add menu to tray icon and show
             Tray.trayIcon.Visible = true;
             Tray.trayIcon.MouseClick += TrayIcon_MouseClick;
-            
-            // Remove  when realize
-            //Properties.Settings.Default.Save();
 
             // Set window position
-            this.Left = SystemParameters.PrimaryScreenWidth - this.Width - 50;
-            this.Top = SystemParameters.PrimaryScreenHeight - this.Height - 90;
+            Left = SystemParameters.PrimaryScreenWidth - Width - 50;
+            Top = SystemParameters.PrimaryScreenHeight - Height - 90;
         }
 
         private void TrayIcon_MouseClick(object sender, System.Windows.Forms.MouseEventArgs e) {
             if (e.Button == MouseButtons.Left)
                 OpenCaptureWindow(0);
             if (e.Button == MouseButtons.Right) {
-                this.Show();
+                Show();
                 WindowState = WindowState.Normal;
-                this.Activate();
+                Activate();
             }   
         }
 
         // Minimize to system tray when applicaiton is minimized
         protected override void OnStateChanged(EventArgs e) {
-            if (WindowState == WindowState.Minimized) this.Hide();
+            if (WindowState == WindowState.Minimized)
+                Hide();
             base.OnStateChanged(e);
         }
 

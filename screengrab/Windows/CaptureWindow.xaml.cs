@@ -31,7 +31,7 @@ namespace screengrab {
 
         public void CloseWindow() {
             Properties.Settings.Default.CaptureWindowOpened = false;
-            this.Close();
+            Close();
         }
 
         public CaptureWindow(int inf) {
@@ -44,11 +44,11 @@ namespace screengrab {
             screenWidth = SystemParameters.VirtualScreenWidth;
             screenHeight = SystemParameters.VirtualScreenHeight;
 
-            this.Height = screenHeight;
-            this.Width = screenWidth;
+            Height = screenHeight;
+            Width = screenWidth;
 
-            this.Top = 0;
-            this.Left = 0;
+            Top = screenTop;
+            Left = screenLeft;
 
             img.Source = CopyScreen();
             canvas.Children.Add(img);
@@ -164,11 +164,6 @@ namespace screengrab {
 
                 w = Math.Max(currentPoint.X, firstClick.X) - x;
                 h = Math.Max(currentPoint.Y, firstClick.Y) - y;
-
-                // Round
-                //int round = 5;
-                //w = Math.Round(w / round) * round;
-                //h = Math.Round(h / round) * round;
 
                 _rect.Width = w;
                 _rect.Height = h;
