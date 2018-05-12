@@ -8,6 +8,8 @@
 
 ScreenGrabber is a free and open source program that lets you capture any area of your screen, edit with pencil and share it with a single press of a key. 
 
+**1 click for screenshot**
+
 # Features: 
 
 - Capture any area
@@ -16,6 +18,22 @@ ScreenGrabber is a free and open source program that lets you capture any area o
 - Copy image to buffer
 - Set startup
 
+# Screenshots:
+
+Main Window:
+
+![2017-09-04_10-20-17](https://user-images.githubusercontent.com/23909416/30016038-0d496c20-915c-11e7-9f8f-f3372a3f8b12.gif)
+
+Capture:
+
+![2017-09-04_10-21-29](https://user-images.githubusercontent.com/23909416/30016052-217c1666-915c-11e7-870b-98b0b08f5d9f.gif)
+
+Editing:
+
+![2017-09-04_10-22-07](https://user-images.githubusercontent.com/23909416/30016041-12e5022a-915c-11e7-968a-22b84175ed7e.gif)
+
+   [softpedia]: <http://www.softpedia.com/get/Multimedia/Graphic/Graphic-Capture/qvepoy-Screen-Grabber.shtml>
+   
 # Review from [Softpedia][softpedia]:
 
 **Capture any area of your screen with a simple hotkey, make basic annotations and copy the image to the clipboard or save it, with this lightweight utility**
@@ -43,19 +61,3 @@ The biggest problem with Screen Grabber is that it lacks some features provided 
 The editing tools at your disposal are also very limited, so much so that you are probably better off copying the image to the clipboard and using Paint to perform the modifications.
 
 In the end, Screen Grabber is a straightforward, unobtrusive utility that makes it easier to capture content from your desktop, but it offers a rather limited feature set for a screen capture utility.
-
-# Screenshots:
-
-Main Window:
-
-![2017-09-04_10-20-17](https://user-images.githubusercontent.com/23909416/30016038-0d496c20-915c-11e7-9f8f-f3372a3f8b12.gif)
-
-Capture:
-
-![2017-09-04_10-21-29](https://user-images.githubusercontent.com/23909416/30016052-217c1666-915c-11e7-870b-98b0b08f5d9f.gif)
-
-Editing:
-
-![2017-09-04_10-22-07](https://user-images.githubusercontent.com/23909416/30016041-12e5022a-915c-11e7-968a-22b84175ed7e.gif)
-
-   [softpedia]: <http://www.softpedia.com/get/Multimedia/Graphic/Graphic-Capture/qvepoy-Screen-Grabber.shtml>
