@@ -10,6 +10,8 @@ ScreenGrabber is a free and open source program that lets you capture any area o
 
 **1 click for screenshot**
 
+<img src="program.png"/>
+
 # Features: 
 
 - Capture any area
