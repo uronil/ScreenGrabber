@@ -6,6 +6,8 @@
 [![Downloads](https://img.shields.io/github/downloads/qvepoy/ScreenGrabber/total.svg?label=Downloads&maxAge=60)](https://github.com/qvepoy/ScreenGrabber/releases/latest)
 [![Discord](https://discordapp.com/api/guilds/356095189317582848/widget.png)](https://discord.gg/NzJnYGF)
 
+Do not use it! Use ShareX open source program for screenshoots.
+
 ScreenGrabber is a free and open source program that lets you capture any area of your screen, edit with pencil and share it with a single press of a key. 
 
 **1 click for screenshot**
